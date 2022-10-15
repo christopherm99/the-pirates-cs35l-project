@@ -1,0 +1,22 @@
+{
+  "name": "cs35l-project-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christopherm99/the-pirates-cs35l-project.git"
+  },
+  "author": "Christopher Milan <chris.m.milan@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christopherm99/the-pirates-cs35l-project/issues"
+  },
+  "homepage": "https://github.com/christopherm99/the-pirates-cs35l-project#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

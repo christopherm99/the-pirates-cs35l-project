@@ -4,7 +4,7 @@ import express from "express";
 import api from "./api/index.js";
 import authRouter from "./routes/auth.js";
 
-const mysql = require('mysql');
+import * as mysql from "mysql";
 
 const app = express();
 const port = 8080;

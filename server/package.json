@@ -2,7 +2,7 @@
   "name": "cs35l-project-server",
   "version": "0.1.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

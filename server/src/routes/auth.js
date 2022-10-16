@@ -2,7 +2,7 @@ import express from "express";
 import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
 
-import db from "../db.js";
+import db from "../../db.js";
 
 const router = express.Router();
 

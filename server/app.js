@@ -5,8 +5,8 @@ import MySQLStore from "express-mysql-session";
 
 import db from "./db.js";
 
-import api from "./api/index.js";
-import authRouter from "./routes/auth.js";
+import api from "./src/api/index.js";
+import authRouter from "./src/routes/auth.js";
 
 const app = express();
 const port = 8080;

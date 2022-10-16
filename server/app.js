@@ -1,4 +1,4 @@
-require("dotenv").config();
+import "./config.js";
 import express from "express";
 
 import api from "./api/index.js";

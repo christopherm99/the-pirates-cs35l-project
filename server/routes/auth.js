@@ -2,8 +2,6 @@ import express from "express";
 import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
 
-console.log(process.env["GOOGLE_CLIENT_ID"]);
-
 passport.use(
   new GoogleStrategy(
     {

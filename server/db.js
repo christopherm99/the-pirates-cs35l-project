@@ -5,11 +5,12 @@ const sql_db = "X_MARKS_SPOT";
 // todo put conditional statements here if you're using different local mysqls
 const sql_user = process.env["CAESAR_SQL_USER"];
 const sql_pass = process.env["CAESAR_SQL_PASS"];
+const sql_host = process.env["CAESAR_SQL_HOST"];
 
 // it is necessary to make a pool, because mysql gets upset sometimes if it runs for too long
 const con = mysql.createPool({
   connectionLimit: 10,
-  host: "localhost",
+  host: sql_host,
   user: sql_user,
   password: sql_pass,
   database: sql_db,

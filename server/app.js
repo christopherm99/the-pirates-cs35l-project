@@ -32,8 +32,8 @@ async function connectLocalSQL() {
     let sql_user, sql_pass;
 
     // todo put conditional statements here if you're using different local mysqls
-    sql_user = CAESAR_SQL_USER;
-    sql_pass = CAESAR_SQL_PASS;
+    sql_user = process.env["CAESAR_SQL_USER"];
+    sql_pass = process.env["CAESAR_SQL_PASS"];
 
     // it is necessary to make a pool, because mysql gets upset sometimes if it runs for too long
     con = mysql.createPool({

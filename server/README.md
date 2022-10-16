@@ -10,6 +10,9 @@ Create `.env` file with the format as follows:
 ```
 GOOGLE_CLIENT_ID="<client id>"
 GOOGLE_CLIENT_SECRET="<client secret>"
+CAESAR_SQL_USER="<username>"
+CAESAR_SQL_PASS="<password>"
+CAESAR_SQL_HOST="<hostname>"
 ```
 
 ## Development

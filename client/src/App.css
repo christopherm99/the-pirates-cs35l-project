@@ -1,38 +1,102 @@
+html, body {
+  background: #9BCFFF;
+  height: 100%;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.navbar{
+  height: 60px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.form-button {
+  background: #466582;
+  border-radius: 14px;
+  padding: 10px 20px;
+  margin: 0px 10px;
   color: white;
+  margin-left: auto;
+  justify-content: flex-end;
 }
 
-.App-link {
-  color: #61dafb;
+.nav--months {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-size: 25px;
+  justify-content: space-around;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.week{
+  justify-content: center;
+  display: flex;
+  height: 100%;
+  padding: 20px;
+}
+
+.day {
+  padding: 8px;
+  margin: 8px;
+  width: 125px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.date-num {
+  text-align: center;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+
+}
+
+.week-day {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #3A3A3A;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #CDCDCD;
+}
+
+.carpools {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Carpool {
+  background: #E8B8FF;
+  border-radius: 14px;
+  padding: 4px 10px 6px 10px;
+  margin: 4px 0px;
+}
+
+.carpool--time {
+  font-weight: 300;
+  font-size: 30px 
+}
+
+.carpooler{
+  font-weight: 300;
+  font-size: 11px;
+  margin: 2px 0px;
+  line-height: 9px;
+  margin: 4px 0px;
 }

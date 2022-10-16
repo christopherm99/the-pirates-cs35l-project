@@ -1,23 +1,24 @@
 import logo from './logo.svg';
+import Day from './Day.js'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="navbar">
+        <div className="nav--months">January 2022</div>
+        <a className="form-button">sign up</a>
+        <a className="form-button">search week</a>
+      </div>
+      <div className="week">
+        <Day/>
+        <Day/>
+        <Day/>
+        <Day/>
+        <Day/>
+        <Day/>
+        <Day/>
+      </div>
     </div>
   );
 }

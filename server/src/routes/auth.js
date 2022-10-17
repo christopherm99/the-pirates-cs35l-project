@@ -72,16 +72,16 @@ passport.use(
 );
 
 passport.serializeUser((user, cb) => {
-  process.nextTick(()=> {
-    cb(null, { id: user.id, username: user.username, name: user.name })
-  })
-})
+  process.nextTick(() => {
+    cb(null, { id: user.id, username: user.username, name: user.name });
+  });
+});
 
 passport.deserializeUser((user, cb) => {
-  process.nextTick(()=> {
+  process.nextTick(() => {
     return cb(null, user);
-  })
-})
+  });
+});
 
 router.get("/login", function (req, res) {
   res.send(`<h1>Sign in</h1>
@@ -91,10 +91,13 @@ router.get("/login", function (req, res) {
 
 router.get("/login/federated/google", passport.authenticate("google"));
 
-router.get("/oauth2/redirect/google", passport.authenticate("google", {
-  successRedirect: "/",
-  failureRedirect: "/login"
-}))
+router.get(
+  "/oauth2/redirect/google",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
 
 router.get(
   "/oauth2/redirect/google",

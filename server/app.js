@@ -1,11 +1,12 @@
 import "./config.js";
 import express from "express";
+import passport from "passport";
 import session from "express-session";
 import MySQLStore from "express-mysql-session";
 
 import db from "./db.js";
 
-import api from "./src/api/index.js";
+import apiRouter from "./src/api/index.js";
 import authRouter from "./src/routes/auth.js";
 
 const app = express();
@@ -14,6 +15,8 @@ const port = 8080;
 app.get("/", (req, res) => {
   res.send("hello world");
 });
+
+app.use(express.json());
 
 app.use(
   session({
@@ -30,10 +33,14 @@ app.use(
   })
 );
 
+app.use(passport.authenticate("session"));
+
 app.use("/", authRouter);
-app.use("/practice", api.practice);
-app.use("/signup", api.signup);
-app.use("/users", api.users);
+app.use("/api", apiRouter);
+
+app.use((req, res) => {
+  res.status(404).send("Page not found");
+});
 
 app.listen(port, () => {
   console.log(`Started server on port http://localhost:${port}/`);

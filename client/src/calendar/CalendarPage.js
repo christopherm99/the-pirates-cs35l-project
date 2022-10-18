@@ -1,5 +1,7 @@
 import "./CalendarPage.css";
 import Navbar from "../navbar/Navbar";
+import SearchMembers from "../search_members/SearchMembers";
+import Search from "../search_members/Search";
 
 export default function CalendarPage() {
   // This is the page where we will allow users to search through past data
@@ -9,7 +11,7 @@ export default function CalendarPage() {
     <>
       <Navbar returnHomeButton submitFormButton loginButton/>
       <div>
-        Hello world, this is about to be the calendar page.
+        <SearchMembers />
       </div>
     </>
   )

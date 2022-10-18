@@ -20,7 +20,7 @@ export default function Homepage() {
       <div className="navbar">
         <div className="nav--months">January 2022</div>
         <a className="form-button">sign up</a>
-        <a className="form-button">search week</a>
+        <a className="form-button" href="/calendar">search week</a>
       </div>
       <div className="week">
         <DayColumn dateString="2022-10-16" carsLeaving={carsLeaving} />

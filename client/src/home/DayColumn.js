@@ -4,7 +4,7 @@ import CarpoolChip from "./CarpoolChip"
 export default function DayColumn({dateString, carsLeaving}) {
   // dateString should be an ISO datestring such as "2022-10-11"
   let dateMomentObj = moment(dateString);
-  console.log(dateString);
+  console.log(carsLeaving);
 
   return(
       <div className="day">
@@ -14,7 +14,7 @@ export default function DayColumn({dateString, carsLeaving}) {
           </div>
           <div className="carpools">
             {carsLeaving.map(car => (
-              <CarpoolChip passengers={car.passengers} leaveTime={car.leaveTime} driver={car.driver} />
+              <CarpoolChip passengers={car.passengers} depart_time={car.depart_time} driver={car.driver} />
             ))}
           </div>
       </div>

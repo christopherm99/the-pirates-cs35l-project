@@ -1,6 +1,7 @@
 import './App.css';
 import Homepage from './home/Homepage';
 import CalendarPage from './calendar/CalendarPage';
+import Form from './form/Form'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
 
           {/* These are other pages we will implement in the future */}
-          {/* <Route path="/submitform" element={<Form />} /> */}
+          <Route path="/submitform" element={<Form />} />
           <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </Router>

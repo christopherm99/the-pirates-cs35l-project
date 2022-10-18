@@ -1,4 +1,4 @@
-import "./CalendarPage.css";
+import "./Form.css";
 
 export default function CalendarPage() {
   
@@ -10,7 +10,7 @@ export default function CalendarPage() {
         <a className="form-button" href="/">Return Home</a>
       </div>
       <div>
-        Hello world, this is about to be the calendar page.
+        Hello world, this is about to be the form where you submit your availability for the upcoming week.
       </div>
     </>
   )

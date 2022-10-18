@@ -56,6 +56,8 @@ con.query(
   "CREATE TABLE IF NOT EXISTS practices ( \
   id INT AUTO_INCREMENT, \
   driver_signup_id INT NOT NULL, \
+  driver_id INT NOT NULL, \
+  user_signup_id INT NOT NULL, \
   user_id INT NOT NULL, \
   leave_time DATETIME, \
   PRIMARY KEY (id) \

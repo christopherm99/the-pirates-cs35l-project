@@ -1,11 +1,10 @@
 import * as mysql from "mysql";
 
 //////////////// Connection and Set Up ////////////////////////////////////////////////////////////////
-const sql_db = "X_MARKS_SPOT";
-// todo put conditional statements here if you're using different local mysqls
-const sql_user = process.env["CAESAR_SQL_USER"];
-const sql_pass = process.env["CAESAR_SQL_PASS"];
-const sql_host = process.env["CAESAR_SQL_HOST"];
+const sql_db = process.env["SQL_DB"];
+const sql_user = process.env["SQL_USER"];
+const sql_pass = process.env["SQL_PASS"];
+const sql_host = process.env["SQL_HOST"];
 
 // it is necessary to make a pool, because mysql gets upset sometimes if it runs for too long
 const con = mysql.createPool({
@@ -33,5 +32,34 @@ con.on("connection", function (connection) {
     console.error(new Date(), "MySQL close", err);
   });
 });
+
+con.query(
+  "CREATE TABLE IF NOT EXISTS practices ( \
+  id INT AUTO_INCREMENT, \
+  driver_signup_id INT NOT NULL, \
+  user_id INT NOT NULL, \
+  leave_time DATETIME, \
+  PRIMARY KEY (id) \
+)"
+);
+con.query(
+  "CREATE TABLE IF NOT EXISTS sign_ups ( \
+  id INT NOT NULL AUTO_INCREMENT, \
+  user_id INT NOT NULL, \
+  timestamp DATETIME, \
+  car_capacity INT NOT NULL, \
+  leave_time DATETIME, \
+  PRIMARY KEY (id) \
+)"
+);
+con.query(
+  "CREATE TABLE IF NOT EXISTS practices ( \
+  id INT AUTO_INCREMENT, \
+  driver_signup_id INT NOT NULL, \
+  user_id INT NOT NULL, \
+  leave_time DATETIME, \
+  PRIMARY KEY (id) \
+)"
+);
 
 export default con;

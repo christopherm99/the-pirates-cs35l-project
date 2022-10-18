@@ -1,14 +1,13 @@
 import "./CalendarPage.css";
+import Navbar from "../navbar/Navbar";
 
 export default function CalendarPage() {
-  
+  // This is the page where we will allow users to search through past data
+  // This page should first check if the user is authenticated or not,
+  // and if the user is not logged in, we should either show an error or redirect them to the home page.
   return (
     <>
-      <div className="navbar">
-        <div className="nav--months">January 2022</div>
-        <a className="form-button">sign up</a>
-        <a className="form-button" href="/">Return Home</a>
-      </div>
+      <Navbar returnHomeButton submitFormButton signupButton/>
       <div>
         Hello world, this is about to be the calendar page.
       </div>

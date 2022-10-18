@@ -1,5 +1,6 @@
-import DayColumn from "./DayColumn.js";
 import "./Homepage.css";
+import DayColumn from "./DayColumn.js";
+import Navbar from "../navbar/Navbar";
 
 export default function Homepage() {
   const carsLeaving = [
@@ -17,11 +18,7 @@ export default function Homepage() {
   
   return (
     <>
-      <div className="navbar">
-        <div className="nav--months">January 2022</div>
-        <a className="form-button">sign up</a>
-        <a className="form-button" href="/calendar">search week</a>
-      </div>
+      <Navbar searchWeekButton submitFormButton signupButton/>
       <div className="week">
         <DayColumn dateString="2022-10-16" carsLeaving={carsLeaving} />
         <DayColumn dateString="2022-10-17" carsLeaving={carsLeaving} />

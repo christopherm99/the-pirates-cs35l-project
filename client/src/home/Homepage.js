@@ -18,7 +18,7 @@ export default function Homepage() {
   
   return (
     <>
-      <Navbar searchWeekButton submitFormButton signupButton/>
+      <Navbar searchWeekButton submitFormButton loginButton/>
       <div className="week">
         <DayColumn dateString="2022-10-16" carsLeaving={carsLeaving} />
         <DayColumn dateString="2022-10-17" carsLeaving={carsLeaving} />

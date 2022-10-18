@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import Day from './Day.js'
 import './App.css';
+import Homepage from './home/Homepage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <div className="navbar">
-        <div className="nav--months">January 2022</div>
-        <a className="form-button">sign up</a>
-        <a className="form-button">search week</a>
-      </div>
-      <div className="week">
-        <Day/>
-        <Day/>
-        <Day/>
-        <Day/>
-        <Day/>
-        <Day/>
-        <Day/>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+
+          {/* These are other pages we will implement in the future */}
+          {/* <Route path="/submitform" element={<Form />} />
+          <Route path="/calendar" element={<Calendar />} /> */}
+        </Routes>
+      </Router>
     </div>
   );
 }

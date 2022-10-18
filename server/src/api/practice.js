@@ -1,10 +1,14 @@
 import express from "express";
 
 import { requiresAuth } from "../middleware/auth.js";
+import con from "../../db.js";
 
 const router = express.Router();
 
+// returns all data for the current week in json format
 router.get("/", (req, res) => {
+
+  // test data
   res.json({
     Tuesday: [
       {
@@ -75,6 +79,24 @@ router.get("/", (req, res) => {
       },
     ],
   });
+
+    querytext = "";
+
+  // real data
+    /*
+    con.query(querytext, (err, result) => {
+
+        // maybe should remove this?
+        if (err) throw err;
+        // remove if not testing
+        console.log("1 record inserted. ID: " + result.insertId);
+
+        return;
+    });
+    */
+
+
+
 });
 
 router.get("/:week", requiresAuth, (req, res) => {

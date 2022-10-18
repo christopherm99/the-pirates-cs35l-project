@@ -60,6 +60,7 @@ con.query(
   user_signup_id INT NOT NULL, \
   user_id INT NOT NULL, \
   leave_time DATETIME, \
+  is_verified INT NOT NULL \
   PRIMARY KEY (id) \
 )"
 );

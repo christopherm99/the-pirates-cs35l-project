@@ -1,20 +1,21 @@
+import moment from 'moment';
 import React from "react"
 import CarpoolChip from "./CarpoolChip"
-export default function DayColumn(props) {
-  const dataForADay = {
-    passengers: ["Joe Burger", "Angus Burger", "Super Burger", "Beyond Burger"],
-    leaveTime: "2:00",
-    driver: "Chris Milan",
-  }
+export default function DayColumn({dateString, carsLeaving}) {
+  // dateString should be an ISO datestring such as "2022-10-11"
+  let dateMomentObj = moment(dateString);
+  console.log(dateString);
+
   return(
       <div className="day">
           <div className="day-date">
-              <div className="date-num">10</div>
-              <div className="week-day">sunday</div>
+              <div className="date-num">{dateMomentObj.format('D')}</div>
+              <div className="week-day">{dateMomentObj.format('dddd')}</div>
           </div>
           <div className="carpools">
-              <CarpoolChip passengers={dataForADay.passengers} leaveTime={dataForADay.leaveTime} driver={dataForADay.driver} />
-              <CarpoolChip passengers={dataForADay.passengers} leaveTime={dataForADay.leaveTime} driver={dataForADay.driver} />
+            {carsLeaving.map(car => (
+              <CarpoolChip passengers={car.passengers} leaveTime={car.leaveTime} driver={car.driver} />
+            ))}
           </div>
       </div>
   )

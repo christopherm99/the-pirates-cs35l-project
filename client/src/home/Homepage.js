@@ -1,79 +1,48 @@
 import "./Homepage.css";
 import DayColumn from "./DayColumn.js";
 import Navbar from "../navbar/Navbar";
+import React from "react";
 import axios from "axios";
+import moment from "moment";
+
+const baseURL = "http://localhost:8080/api"
 
 export default function Homepage() {
-  const days = {
-    Tuesday: [	
-      {
-        driver: {
-            name: "Eric Wu",
-            pfp_id: 2940230,
-            uid: 45678900
-        },
-        depart_time: "2:10",
-        passengers: [
-          {
-           name: "Christopher Milan",
-            pfp_id: 456789,
-            uid:13989
-          },
-          {
-            name: "Michael Bunte",
-             pfp_id: 5738,
-             uid:175948
-           },
-           {
-            name: "Cool Dawg",
-             pfp_id: 389,
-             uid:390
-           }
-        ]
-      },
-    ],
-    Wednesday: [
-      {
-        driver: {
-            name: "Jackson Spendy",
-            pfp_id: 12342,
-            uid: 3456
-        },
-        depart_time: "2:10",
-        passengers: [
-          {
-           name: "Milan Chris",
-            pfp_id: 567856,
-            uid:123
-          },
-          {
-            name: "yeah",
-             pfp_id: 34563563,
-             uid:568374263152
-           },
-           {
-            name: "lol",
-             pfp_id: 23457245,
-             uid:247
-           }
-        ]
+  const [days, setDays] = React.useState({});
+
+  React.useEffect(() => {
+    axios.get(`${baseURL}/practice`).then((response) => {
+      setDays(response.data);
+    });
+  }, [])
+
+
+  var dayArr = [];
+  for (var key in days) {
+      if (days.hasOwnProperty(key)) {
+          dayArr.push( [ key, days[key] ] );
       }
-    ]
   }
 
-var dayArr = [];
-for (var key in days) {
-    if (days.hasOwnProperty(key)) {
-        dayArr.push( [ key, days[key] ] );
-    }
-}
-// console.log(dayArr);
-
   const cards = dayArr.map(item => {
+    const [key, value] = item;
+    const firstDayOfCurrentWeek =  moment().startOf('week'); // This will be a Sunday
+    let today = null;
+    if (key === "Tuesday") {
+      today = firstDayOfCurrentWeek.add(2, 'days');
+    } else if (key === "Wednesday") {
+      today = firstDayOfCurrentWeek.add(3, 'days');
+    } else if (key === "Thursday") {
+      today = firstDayOfCurrentWeek.add(4, 'days');
+    } else if (key === "Friday") {
+      today = firstDayOfCurrentWeek.add(5, 'days');
+    }
+    
+
     return (
       <DayColumn 
-        dateString={"2022-10-16"}
-        carsLeaving={item[1]}
+        dateString={today.format("YYYY-MM-DD")}
+        carsLeaving={value}
       />
     )
   })

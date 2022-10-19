@@ -8,6 +8,11 @@ const router = express.Router();
 // returns all data for the current week in json format
 router.get("/", (req, res) => {
 
+  // This line is needed in order to allow localhost to the client running on localhost:3000 to access the data.
+  // More info at https://www.stackhawk.com/blog/react-cors-guide-what-it-is-and-how-to-enable-it/
+  // TODO: we will need to include this line in other places in the server if we want to allow our client to use other api endpoints
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+
   // test data
   res.json({
     Tuesday: [

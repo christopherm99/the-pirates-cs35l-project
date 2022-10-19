@@ -4,7 +4,6 @@ import CarpoolChip from "./CarpoolChip"
 export default function DayColumn({dateString, carsLeaving}) {
   // dateString should be an ISO datestring such as "2022-10-11"
   let dateMomentObj = moment(dateString);
-  console.log(carsLeaving);
 
   return(
       <div className="day">

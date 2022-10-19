@@ -9,6 +9,7 @@ import db from "./db.js";
 import apiRouter from "./src/api/index.js";
 import authRouter from "./src/routes/auth.js";
 
+
 const app = express();
 const port = 8080;
 
@@ -33,6 +34,18 @@ app.use(
   })
 );
 
+function runTest() {
+    db.query("select * from users;", (err, result) => {
+
+        // maybe should remove this?
+        if (err) throw err;
+        // remove if not testing
+        console.log(result);
+
+        return;
+    });
+}
+
 app.use(passport.authenticate("session"));
 
 app.use("/", authRouter);
@@ -43,5 +56,6 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Started server on port http://localhost:${port}/`);
+    console.log(`Started server on port http://localhost:${port}/`);
+    runTest();
 });

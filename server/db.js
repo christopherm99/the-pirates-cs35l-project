@@ -1,4 +1,4 @@
-import * as mysql from "mysql";
+import mysql2 from "mysql2/promise";
 
 //////////////// Connection and Set Up ////////////////////////////////////////////////////////////////
 const sql_db = process.env["SQL_DB"];
@@ -7,7 +7,7 @@ const sql_pass = process.env["SQL_PASS"];
 const sql_host = process.env["SQL_HOST"];
 
 // it is necessary to make a pool, because mysql gets upset sometimes if it runs for too long
-const con = mysql.createPool({
+const con = mysql2.createPool({
   connectionLimit: 10,
   host: sql_host,
   user: sql_user,
@@ -60,7 +60,7 @@ con.query(
   user_signup_id INT NOT NULL, \
   user_id INT NOT NULL, \
   leave_time DATETIME, \
-  is_verified INT NOT NULL \
+  is_verified INT NOT NULL, \
   PRIMARY KEY (id) \
 )"
 );

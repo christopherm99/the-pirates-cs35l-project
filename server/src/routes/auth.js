@@ -16,64 +16,34 @@ passport.use(
       state: true,
     },
     (accessToken, refreshToken, profile, cb) => {
-      db.query(
-        "SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?",
-        ["https://accounts.google.com", profile.id],
-        (err, cred) => {
-          if (err) {
-            return cb(err);
-          }
+      db.query("SELECT * FROM users WHERE user_id = ?", profile.id)
+        .then((cred) => {
           if (!cred) {
             // User is not registered yet
             // TODO: Insert more user data here?
-            db.query(
-              "INSERT INTO users (name) VALUES (?)",
-              profile.displayName,
-              (err, results) => {
-                if (err) {
-                  return cb(err);
-                }
-                let id = results.insertId;
-                db.query(
-                  "INSERT INTO federated_credentials (user_id, provider, subject) VALUES (?, ?, ?)",
-                  [id, "https://accounts.google.com", profile.id],
-                  (err) => {
-                    if (err) {
-                      return cb(err);
-                    }
-                    return cb(null, {
-                      id,
-                      name: profile.displayName,
-                    });
-                  }
-                );
-              }
+            return db.query(
+              "INSERT INTO users (user_id, username) VALUES (?, ?)",
+              [profile.id, profile.displayName]
             );
           } else {
             // Otherwise, user is registered
-            db.query(
-              "SELECT * FROM users WHERE id = ?",
-              cred.user_id,
-              (err, row) => {
-                if (err) {
-                  return cb(err);
-                }
-                if (!row) {
-                  return cb(null, false);
-                } // Should never reach this state
-                return cb(null, row);
-              }
-            );
+            cb(null, cred);
           }
-        }
-      );
+        })
+        .then(() =>
+          cb(null, {
+            user_id: profile.id,
+            username: profile.displayName,
+          })
+        )
+        .catch((err) => cb(err));
     }
   )
 );
 
 passport.serializeUser((user, cb) => {
   process.nextTick(() => {
-    cb(null, { id: user.id, username: user.username, name: user.name });
+    cb(null, user);
   });
 });
 

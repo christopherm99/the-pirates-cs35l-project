@@ -23,7 +23,11 @@ passport.use(
             // TODO: Insert more user data (isadmin and phonenumber)
             db.query(
               "INSERT INTO users (username, pfp, email) VALUES (?, ?, ?)",
-              [profile.displayName, profile.photos[0].value, profile.email]
+              [
+                profile.displayName,
+                profile.photos[0].value,
+                profile.emails[0].value,
+              ]
             )
               .then(([ret]) => {
                 cb(null, {

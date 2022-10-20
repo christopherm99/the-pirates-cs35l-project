@@ -1,0 +1,19 @@
+{
+  "name": "cs35l-project",
+  "version": "0.1.0",
+  "description": "The Pirates' CS35L Sailing Scheduler",
+  "author": "Christopher Milan <chris.m.milan@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christopherm99/the-pirates-cs35l-project.git"
+  },
+  "files": [
+    "./client/*",
+    "./server/*"
+  ],
+  "scripts": {
+    "install": "cd client && npm i",
+    "postinstall": "cd server && npm i"
+  }
+}

@@ -14,6 +14,19 @@
   ],
   "scripts": {
     "install": "cd client && npm i",
-    "postinstall": "cd server && npm i"
+    "postinstall": "cd server && npm i",
+    "build": "cd client && npm run build",
+    "postbuild": "npm run copy",
+    "precopy": "rimraf server/static && mkdirp server/static",
+    "copy": "copyfiles -f client/build/* server/static/",
+    "prestart": "npm run build",
+    "start": "cd server && npm start",
+    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^7.4.0",
+    "copyfiles": "^2.4.1",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2"
   }
 }

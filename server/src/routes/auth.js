@@ -12,45 +12,43 @@ passport.use(
       clientID: process.env["GOOGLE_CLIENT_ID"],
       clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
       callbackURL: "http://localhost:8080/oauth2/redirect/google",
-      scope: ["profile"],
+      scope: ["profile", "email"],
       state: true,
     },
     (accessToken, refreshToken, profile, cb) => {
       db.query("SELECT * FROM users WHERE user_id = ?", profile.id)
-        .then((cred) => {
-          if (!cred) {
+        .then(([cred]) => {
+          if (!cred.length) {
             // User is not registered yet
-            // TODO: Insert more user data here?
-            return db.query(
-              "INSERT INTO users (user_id, username) VALUES (?, ?)",
-              [profile.id, profile.displayName]
-            );
+            // TODO: Insert more user data (isadmin and phonenumber)
+            db.query(
+              "INSERT INTO users (username, pfp, email) VALUES (?, ?, ?)",
+              [profile.displayName, profile.photos[0].value, profile.email]
+            )
+              .then(([ret]) => {
+                cb(null, {
+                  user_id: ret.insertId,
+                });
+              })
+              .catch((err) => cb(err));
           } else {
             // Otherwise, user is registered
             cb(null, cred);
           }
         })
-        .then(() =>
-          cb(null, {
-            user_id: profile.id,
-            username: profile.displayName,
-          })
-        )
         .catch((err) => cb(err));
     }
   )
 );
 
 passport.serializeUser((user, cb) => {
-  process.nextTick(() => {
-    cb(null, user);
-  });
+  return cb(null, user.user_id);
 });
 
-passport.deserializeUser((user, cb) => {
-  process.nextTick(() => {
-    return cb(null, user);
-  });
+passport.deserializeUser((id, cb) => {
+  db.query("SELECT * FROM users WHERE user_id = ?", id)
+    .then((user) => cb(null, user))
+    .catch((err) => cb(err));
 });
 
 router.get("/login", function (req, res) {

@@ -1,5 +1,4 @@
 .navbar{
-  height: 60px;
   background: #FFFFFF;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -10,7 +9,7 @@
   background: #466582;
   border-radius: 14px;
   padding: 10px 20px;
-  margin: 0px 10px;
+  margin: 10px 10px;
   color: white;
   margin-left: auto;
   justify-content: flex-end;

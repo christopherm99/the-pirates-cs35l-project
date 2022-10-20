@@ -33,36 +33,40 @@ con.on("connection", function (connection) {
   });
 });
 
-con.query(
-  "CREATE TABLE IF NOT EXISTS practices ( \
-  id INT AUTO_INCREMENT, \
-  driver_signup_id INT NOT NULL, \
-  user_id INT NOT NULL, \
-  leave_time DATETIME, \
-  PRIMARY KEY (id) \
-)"
-);
-con.query(
-  "CREATE TABLE IF NOT EXISTS sign_ups ( \
-  id INT NOT NULL AUTO_INCREMENT, \
-  user_id INT NOT NULL, \
-  timestamp DATETIME, \
-  car_capacity INT NOT NULL, \
-  leave_time DATETIME, \
-  PRIMARY KEY (id) \
-)"
-);
-con.query(
-  "CREATE TABLE IF NOT EXISTS practices ( \
-  id INT AUTO_INCREMENT, \
-  driver_signup_id INT NOT NULL, \
-  driver_id INT NOT NULL, \
-  user_signup_id INT NOT NULL, \
-  user_id INT NOT NULL, \
-  leave_time DATETIME, \
-  is_verified INT NOT NULL, \
-  PRIMARY KEY (id) \
-)"
-);
+Promise.all([
+  con.query(
+    "CREATE TABLE IF NOT EXISTS practices ( \
+    id INT AUTO_INCREMENT, \
+    driver_signup_id INT NOT NULL, \
+    user_id INT NOT NULL, \
+    leave_time DATETIME, \
+    PRIMARY KEY (id) \
+  )"
+  ),
+  con.query(
+    "CREATE TABLE IF NOT EXISTS sign_ups ( \
+    id INT NOT NULL AUTO_INCREMENT, \
+    user_id INT NOT NULL, \
+    timestamp DATETIME, \
+    car_capacity INT NOT NULL, \
+    leave_time DATETIME, \
+    PRIMARY KEY (id) \
+  )"
+  ),
+  con.query(
+    "CREATE TABLE IF NOT EXISTS practices ( \
+    id INT AUTO_INCREMENT, \
+    driver_signup_id INT NOT NULL, \
+    driver_id INT NOT NULL, \
+    user_signup_id INT NOT NULL, \
+    user_id INT NOT NULL, \
+    leave_time DATETIME, \
+    is_verified INT NOT NULL, \
+    PRIMARY KEY (id) \
+  )"
+  ),
+])
+  .then(() => console.log("Configured databases"))
+  .catch((err) => console.error(err));
 
 export default con;

@@ -2,12 +2,13 @@ import React from "react"
 
 const CarpoolChip = ({passengers, depart_time, driver}) => {
   return (
-    <div className="Carpool">
-      <div className="carpool--time">{depart_time}</div>
-      <div className="carpool--driver-display">{driver.name}'s car</div>
+    <div className="bg-purple-300 pt-1 pb-1.5 px-2.5
+    my-1 mx-0 rounded-xl">
+      <div className="font-light text-lg">{depart_time}</div>
+      <div className="font-light text-sm mx-0 my-1">{driver.name}'s car</div>
       {
         passengers.map(passenger => (
-          <div className="carpooler">{passenger.name}</div>
+          <div className="font-light text-xs mx-0 my-[0.5] leading-3">{passenger.name}</div>
         ))
       }
     </div>

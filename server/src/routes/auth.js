@@ -51,7 +51,7 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser((id, cb) => {
   db.query("SELECT * FROM users WHERE user_id = ?", id)
-    .then((user) => cb(null, user))
+    .then(([user]) => cb(null, user[0]))
     .catch((err) => cb(err));
 });
 

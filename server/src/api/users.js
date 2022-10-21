@@ -1,6 +1,7 @@
 import express from "express";
 
-import { requiresAuth } from "../middleware/auth.js";
+import db from "../../db.js";
+import { requiresAuth, requiresAdmin } from "../middleware/auth.js";
 import { getUser } from "../helpers/users.js";
 
 const router = express.Router();
@@ -33,6 +34,25 @@ router.get("/:id", (req, res) => {
       })
     )
     .catch((err) => res.status(400).send(err));
+});
+
+router.post("/", requiresAuth, (req, res) => {
+  db.query("UPDATE users SET phonenumber = ? WHERE user_id = ?", [
+    req.body.phone,
+    req.user.user_id,
+  ])
+    .then(res.status(200).send("OK"))
+    .catch((err) => res.status(500).send(err));
+});
+
+router.post("/:id", requiresAdmin, (req, res) => {
+  db.query("UPDATE users SET phonenumber = ?, isadmin = ? WHERE user_id = ?", [
+    req.body.phone,
+    req.body.isadmin,
+    req.params.id,
+  ])
+    .then(res.status(200).send("OK"))
+    .catch((err) => res.status(500).send(err));
 });
 
 export default router;

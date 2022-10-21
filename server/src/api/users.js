@@ -27,7 +27,10 @@ router.get("/:id", (req, res) => {
         id: user[0].user_id,
         name: user[0].username,
         email: req.isAuthenticated() ? user[0].email : undefined,
-        phone: req.isAuthenticated() && req.user.isadmin ? user[0].phonenumber : undefined,
+        phone:
+          req.isAuthenticated() && req.user.isadmin
+            ? user[0].phonenumber
+            : undefined,
         pfp: user[0].pfp,
         car_capacity: req.isAuthenticated() ? 5 : undefined, // TODO!
       });

@@ -1,6 +1,5 @@
 import express from "express";
 
-import db from "../../db.js";
 import { requiresAuth } from "../middleware/auth.js";
 import { getUser } from "../helpers/users.js";
 

@@ -16,7 +16,7 @@ router.post("/", requiresAuth, (req, res) => {
       )
     );
   });
-  Promise.all(promises).then(() => {
+  Promise.all(queries).then(() => {
     res.status(200).send("OK");
     // TODO: refresh practices table
   });

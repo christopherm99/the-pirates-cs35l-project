@@ -12,10 +12,6 @@ import authRouter from "./src/routes/auth.js";
 const app = express();
 const port = 8080;
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
 app.use(express.json());
 
 app.use(
@@ -35,6 +31,10 @@ app.use(
 
 app.use(passport.authenticate("session"));
 
+app.use(express.static("static"));
+app.get("/", (req, res) => {
+  res.redirect("/index.html");
+})
 app.use("/", authRouter);
 app.use("/api", apiRouter);
 

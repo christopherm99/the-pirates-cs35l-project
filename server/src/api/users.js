@@ -2,11 +2,11 @@ import express from "express";
 
 import db from "../../db.js";
 import { requiresAuth } from "../middleware/auth.js";
+import { getUser } from "../helpers/users.js";
 
 const router = express.Router();
 
 router.get("/", requiresAuth, (req, res) => {
-  console.log(req.user);
   res.json({
     id: req.user.user_id,
     name: req.user.username,
@@ -18,23 +18,21 @@ router.get("/", requiresAuth, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  db.query("SELECT * FROM users where user_id = ?", req.params.id)
-    .then(([user]) => {
-      if (!user[0]) {
-        throw "User not found";
-      }
+  getUser(req.params.id)
+    .then((user) =>
       res.json({
-        id: user[0].user_id,
-        name: user[0].username,
-        email: req.isAuthenticated() ? user[0].email : undefined,
+        id: user.user_id,
+        name: user.username,
+        email: req.isAuthenticated() ? user.email : undefined,
         phone:
-          req.isAuthenticated() && req.user.isadmin
-            ? user[0].phonenumber
+          req.isAuthenticated() &&
+          (req.user.isadmin || req.user.user_id === req.params.id)
+            ? user.phonenumber
             : undefined,
-        pfp: user[0].pfp,
+        pfp: user.pfp,
         car_capacity: req.isAuthenticated() ? 5 : undefined, // TODO!
-      });
-    })
+      })
+    )
     .catch((err) => res.status(400).send(err));
 });
 

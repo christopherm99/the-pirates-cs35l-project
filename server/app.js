@@ -1,5 +1,7 @@
 import "./config.js";
 import express from "express";
+import path from "path";
+import {fileURLToPath} from 'url';
 import passport from "passport";
 import session from "express-session";
 import MySQLStore from "express-mysql-session";
@@ -11,6 +13,8 @@ import authRouter from "./src/routes/auth.js";
 
 const app = express();
 const port = 8080;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 
@@ -31,12 +35,15 @@ app.use(
 
 app.use(passport.authenticate("session"));
 
-app.use(express.static("static"));
-app.get("/", (req, res) => {
-  res.redirect("/index.html");
-})
+
 app.use("/", authRouter);
 app.use("/api", apiRouter);
+
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'static', 'index.html'));
+});
 
 app.use((req, res) => {
   res.status(404).send("Page not found");
@@ -51,3 +58,4 @@ app.use((err, req, res, _next) => {
 app.listen(port, () => {
   console.log(`Started server on port http://localhost:${port}/`);
 });
+

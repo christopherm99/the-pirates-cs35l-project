@@ -8,7 +8,7 @@ export default function Navbar({searchWeekButton, returnHomeButton, submitFormBu
     <div className="navbar">
       <div className="nav--months">January 2022</div>
       {loginButton && 
-        <a className="form-button">Log In</a>
+        <a className="form-button" href="http://localhost:8080/login/federated/google">Log In</a>
       }
       {submitFormButton && 
         <a className="form-button" href="/submitform">Submit Availability Form</a>

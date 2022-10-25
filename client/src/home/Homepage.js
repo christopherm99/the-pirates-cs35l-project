@@ -5,13 +5,11 @@ import React from "react";
 import axios from "axios";
 import moment from "moment";
 
-const baseURL = "http://localhost:8080/api"
-
 export default function Homepage() {
   const [days, setDays] = React.useState({});
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/practice`).then((response) => {
+    axios.get(`/api/practice`).then((response) => {
       setDays(response.data);
     });
   }, [])

@@ -35,11 +35,13 @@ con.on("connection", function (connection) {
 
 Promise.all([
   con.query(
-    "CREATE TABLE IF NOT EXISTS practices ( \
+    "CREATE TABLE IF NOT EXISTS users ( \
     id INT AUTO_INCREMENT, \
-    driver_signup_id INT NOT NULL, \
-    user_id INT NOT NULL, \
-    leave_time DATETIME, \
+    username TEXT, \
+    email TEXT, \
+    pfp TEXT, \
+    isadmin INT, \
+    phonenumber text, \
     PRIMARY KEY (id) \
   )"
   ),

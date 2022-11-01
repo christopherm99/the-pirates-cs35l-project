@@ -9,7 +9,7 @@ export default function Homepage() {
   const [days, setDays] = React.useState({});
 
   React.useEffect(() => {
-    axios.get(`/api/practice`).then((response) => {
+    axios.get(`http://localhost:8080/api/practice`).then((response) => {
       setDays(response.data);
     });
   }, [])

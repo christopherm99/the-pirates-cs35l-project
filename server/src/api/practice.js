@@ -9,6 +9,7 @@ const router = express.Router();
 
 // returns all data for the current week in json format
 router.get("/", (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   db.query(
     "SELECT * FROM practices \
     WHERE YEARWEEK(leave_time) = YEARWEEK(NOW()) \

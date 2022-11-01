@@ -19,7 +19,7 @@ router.post("/", requiresAuth, async (req, res) => {
     queries.push(
       db.query(
         "INSERT INTO sign_ups (user_id, timestamp, car_capacity, leave_time) VALUES (?, ?, ?, ?)",
-        [req.user.user_id, dayjs(), req.body.car_capacity, Date(time)]
+        [req.user.user_id, dayjs().toDate(), req.body.car_capacity, dayjs(time).toDate()]
       )
     );
   });
@@ -32,7 +32,7 @@ router.post("/", requiresAuth, async (req, res) => {
     );
     let queries = [];
     _.forEach(
-      _.groupBy(drivers, dayjs(drivers.leave_time.toDateString())),
+      _.groupBy(drivers, dayjs(drivers.leave_time.toDateString()).toDate()),
       async (day, drivers) => {
         let [passengers] = await db.query(
           "SELECT * FROM sign_ups \
@@ -40,7 +40,7 @@ router.post("/", requiresAuth, async (req, res) => {
             AND leave_time < ? \
             AND car_capacity = 0 \
             ORDER BY leave_time ASC, timestamp ASC",
-          [dayjs(day).startOf("day"), dayjs(day).endOf("day")]
+          [dayjs(day).startOf("day").toDate(), dayjs(day).endOf("day").toDate()]
         );
         drivers.forEach((driver) => {
           let carMembers = passengers.splice(0, driver.car_capacity);

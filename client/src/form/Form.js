@@ -192,7 +192,7 @@ export default function CalendarPage() {
             submit
           </button>
         </div>
-        <div>
+        <div className="error-message">
           {errorMsg}
         </div>
       </div>

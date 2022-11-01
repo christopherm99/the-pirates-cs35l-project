@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post("/", requiresAuth, async (req, res) => {
   await db.query(
-    "DELETE * FROM sign_ups \
+    "DELETE FROM sign_ups \
       WHERE user_id = ? \
       AND YEARWEEK(leave_time) = YEARWEEK(NOW())",
     req.user.user_id

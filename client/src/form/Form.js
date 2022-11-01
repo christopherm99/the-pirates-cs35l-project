@@ -1,6 +1,8 @@
 import "./Form.css";
 import Navbar from "../navbar/Navbar";
 import React from "react";
+import axios from "axios";
+
 
 export default function CalendarPage() {
   // This is the page where users will submit the form weekly to give their availability for carpooling.
@@ -13,6 +15,7 @@ export default function CalendarPage() {
 
   const [canDrive, setCanDrive] = React.useState(null);
   const [numSeatsInput, setNumSeatsInput] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState("");
 
 
   const handleDayTimeUpdate = (index, newTime) => {
@@ -32,7 +35,44 @@ export default function CalendarPage() {
     }
   }
 
-  
+  const verifyFormData = () => {
+    for (let index = 0; index < dayNames.length; index ++) {
+      if (daysChecked[index] && selectedTimes[index] === null) {
+        return `Please select a time for ${dayNames[index]}`;
+      }
+    }
+    if (canDrive === null) {
+      return `Please select whether you can drive.`;
+    }
+    if (canDrive) {
+      if (isNaN(parseInt(numSeatsInput)) || parseInt(numSeatsInput) < 1) {
+        return "Please enter a valid number of seats";
+      }
+    }
+    return "";
+  }
+
+  const handleSubmit = () => {
+    let error = verifyFormData();
+    console.log(error);
+    if (error) {
+      setErrorMsg(error);
+    } else {
+      // make post request here
+      axios.post(`/api/signup`, {
+        days_to_practice: {
+          Tuesday: selectedTimes[0],
+          Wednesday: selectedTimes[1],
+          Thursday: selectedTimes[2],
+          Friday: selectedTimes[3],
+        },
+        car_capacity: parseInt(numSeatsInput) || 0,
+      
+      }).then((response) => {
+        window.location.href="/"
+      });
+    }
+  }
 
 
   return (
@@ -148,9 +188,12 @@ export default function CalendarPage() {
           </div>
         </div>
         <div className="button-container">
-          <button className="submit">
+          <button className="submit" onClick={handleSubmit}>
             submit
           </button>
+        </div>
+        <div>
+          {errorMsg}
         </div>
       </div>
     </>

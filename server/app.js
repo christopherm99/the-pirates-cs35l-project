@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import passport from "passport";
 import session from "express-session";
 import MySQLStore from "express-mysql-session";
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 import db from "./db.js";
 
@@ -38,11 +39,19 @@ app.use(passport.authenticate("session"));
 app.use("/", authRouter);
 app.use("/api", apiRouter);
 
-app.use(express.static(path.join(__dirname, "static")));
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "static", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "static")));
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "static", "index.html"));
+  });
+} else {
+  console.log("Using proxy for React! Make sure React dev server is running.")
+  app.use("/*", createProxyMiddleware({
+    target: "http://localhost:3000",
+    changeOrigin: true,
+    ws: true, // Websockets for webpack
+  }))
+}
 
 app.use((req, res) => {
   res.status(404).send("Page not found");

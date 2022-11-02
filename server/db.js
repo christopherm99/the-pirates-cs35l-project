@@ -1,6 +1,6 @@
 import mysql2 from "mysql2/promise";
 
-//////////////// Connection and Set Up ////////////////////////////////////////////////////////////////
+// Load variables from dotenv
 const sql_db = process.env["SQL_DB"];
 const sql_user = process.env["SQL_USER"];
 const sql_pass = process.env["SQL_PASS"];
@@ -15,16 +15,9 @@ const con = mysql2.createPool({
   database: sql_db,
 });
 
-/*
-  con.connect(function (err) {
-      if (err) throw err;
-      console.log("Connected to local SQL!");
-      connectedToLocalSQL = true;
-  });
-  */
+// Debugging connection
 con.on("connection", function (connection) {
   console.log("DB Connection established");
-
   connection.on("error", function (err) {
     console.error(new Date(), "MySQL error", err.code);
   });
@@ -33,6 +26,7 @@ con.on("connection", function (connection) {
   });
 });
 
+// Create tables in MySQL database, if they don't already exist.
 Promise.all([
   con.query(
     "CREATE TABLE IF NOT EXISTS users ( \

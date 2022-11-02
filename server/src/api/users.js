@@ -6,6 +6,15 @@ import { getUser } from "../helpers/users.js";
 
 const router = express.Router();
 
+router.get("/all", requiresAuth, (req, res) => {
+    db.query("SELECT * FROM users").then(([allusers]) => {
+        res.json({
+            all: allusers
+        })
+            .catch((err) => res.status(400).send(err));
+    });
+});
+
 router.get("/", requiresAuth, (req, res) => {
   res.json({
     id: req.user.user_id,
@@ -34,18 +43,6 @@ router.get("/:id", (req, res) => {
       })
     )
     .catch((err) => res.status(400).send(err));
-});
-
-router.get("/all", requiresAuth, (req, res) => {
-    db.query("SELECT * FROM users").then((allusers) => {
-        res.json({
-            all: allusers
-        })
-        .catch((err) => res.status(400).send(err));
-    }
-    );
-    
-    
 });
 
 router.post("/", requiresAuth, (req, res) => {

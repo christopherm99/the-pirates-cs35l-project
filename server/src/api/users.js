@@ -37,12 +37,15 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/all", requiresAuth, (req, res) => {
-    let [allusers] = await db.query("SELECT * FROM users");
+    db.query("SELECT * FROM users").then((allusers) => {
+        res.json({
+            all: allusers
+        })
+        .catch((err) => res.status(400).send(err));
+    }
+    );
     
-    res.json({
-        all: allusers
-    })
-    .catch((err) => res.status(400).send(err));
+    
 });
 
 router.post("/", requiresAuth, (req, res) => {

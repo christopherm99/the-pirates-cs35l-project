@@ -36,6 +36,15 @@ router.get("/:id", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+router.get("/all", requiresAuth, (req, res) => {
+    let [allusers] = await db.query("SELECT * FROM users");
+    
+    res.json({
+        all: allusers
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
 router.post("/", requiresAuth, (req, res) => {
   db.query("UPDATE users SET phonenumber = ? WHERE user_id = ?", [
     req.body.phone,

@@ -2,6 +2,7 @@ import "./Form.css";
 import Navbar from "../navbar/Navbar";
 import React from "react";
 import axios from "axios";
+import moment from "moment";
 
 
 export default function CalendarPage() {
@@ -11,7 +12,7 @@ export default function CalendarPage() {
 
   const [daysChecked, setDaysChecked] = React.useState([false, false, false, false]);
   const [selectedTimes, setSelectedTimes] = React.useState([null, null, null, null]);
-  const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+  const dayNames = ["Tuesday", "Wednesday", "Thursday", "Friday"];
 
   const [canDrive, setCanDrive] = React.useState(null);
   const [numSeatsInput, setNumSeatsInput] = React.useState("");
@@ -59,13 +60,19 @@ export default function CalendarPage() {
       setErrorMsg(error);
     } else {
       // make post request here
+      const today =  moment().startOf('week'); // This will be a Sunday
+      today.add(2, 'days');
+      const days_to_practice = [];
+      for (let index = 0; index < 4; index ++) {
+        if (selectedTimes[index]) {
+          days_to_practice.push(`${today.format('YYYY-MM-DD')} ${selectedTimes[index]}`)
+        }
+        today.add(1, 'days');
+      }
+      console.log("making post request...");
+      console.log(days_to_practice);
       axios.post(`/api/signup`, {
-        days_to_practice: {
-          Tuesday: selectedTimes[0],
-          Wednesday: selectedTimes[1],
-          Thursday: selectedTimes[2],
-          Friday: selectedTimes[3],
-        },
+        days_to_practice,
         car_capacity: parseInt(numSeatsInput) || 0,
       
       }).then((response) => {

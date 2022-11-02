@@ -78,7 +78,10 @@ Our options for running in development mode are as follows:
   - Client can communicate with the server's API endpoints
   - However, some features are still broken (ie. login)
   - Also, this setup seems to be pretty glitchy
-- Running both servers, with proxy in Express server - Fast, React dev tools work, and all features are natively reachable - Everything is unified under one URL - Forwarding a websocket seems prone to failure?
+- Running both servers, with proxy in Express server
+  - Fast, React dev tools work, and all features are natively reachable
+  - Everything is unified under one URL
+  - Forwarding a websocket seems prone to failure?
 Thus it seems that the last option, the one in use, is solution with least
 issues.
 </details>

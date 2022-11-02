@@ -1,7 +1,7 @@
 import "./config.js";
 import express from "express";
 import path from "path";
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from "url";
 import passport from "passport";
 import session from "express-session";
 import MySQLStore from "express-mysql-session";
@@ -35,14 +35,13 @@ app.use(
 
 app.use(passport.authenticate("session"));
 
-
 app.use("/", authRouter);
 app.use("/api", apiRouter);
 
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, "static")));
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'static', 'index.html'));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "static", "index.html"));
 });
 
 app.use((req, res) => {
@@ -58,4 +57,3 @@ app.use((err, req, res, _next) => {
 app.listen(port, () => {
   console.log(`Started server on port http://localhost:${port}/`);
 });
-

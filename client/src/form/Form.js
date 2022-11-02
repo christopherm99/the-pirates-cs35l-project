@@ -106,8 +106,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="option1"
-                          checked={selectedTimes[index] === "2:00"}
-                          onChange={() => handleDayTimeUpdate(index, "2:00")}
+                          checked={selectedTimes[index] === "14:00"}
+                          onChange={() => handleDayTimeUpdate(index, "14:00")}
                           className="form-check-input"
                         />
                         2:00
@@ -119,8 +119,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="2:15"
-                          checked={selectedTimes[index] === "2:15"}
-                          onChange={() => handleDayTimeUpdate(index, "2:15")}
+                          checked={selectedTimes[index] === "14:15"}
+                          onChange={() => handleDayTimeUpdate(index, "14:15")}
                           className="form-check-input"
                         />
                         2:15
@@ -132,8 +132,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="2:30"
-                          checked={selectedTimes[index] === "2:30"}
-                          onChange={() => handleDayTimeUpdate(index, "2:30")}
+                          checked={selectedTimes[index] === "14:30"}
+                          onChange={() => handleDayTimeUpdate(index, "14:30")}
                           className="form-check-input"
                         />
                         2:30

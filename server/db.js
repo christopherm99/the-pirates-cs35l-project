@@ -36,36 +36,36 @@ con.on("connection", function (connection) {
 Promise.all([
   con.query(
     "CREATE TABLE IF NOT EXISTS users ( \
-    id INT AUTO_INCREMENT, \
-    username TEXT, \
-    email TEXT, \
-    pfp TEXT, \
-    isadmin INT DEFAULT 0, \
-    phonenumber text, \
-    PRIMARY KEY (id) \
-  )"
+      id INT AUTO_INCREMENT, \
+      username TEXT, \
+      email TEXT, \
+      pfp TEXT, \
+      isadmin INT DEFAULT 0, \
+      phonenumber text, \
+      PRIMARY KEY (id) \
+    )"
   ),
   con.query(
     "CREATE TABLE IF NOT EXISTS sign_ups ( \
-    id INT NOT NULL AUTO_INCREMENT, \
-    user_id INT NOT NULL, \
-    timestamp DATETIME, \
-    car_capacity INT NOT NULL DEFAULT 0, \
-    leave_time DATETIME, \
-    PRIMARY KEY (id) \
-  )"
+      id INT NOT NULL AUTO_INCREMENT, \
+      user_id INT NOT NULL, \
+      timestamp DATETIME, \
+      car_capacity INT NOT NULL DEFAULT 0, \
+      leave_time DATETIME, \
+      PRIMARY KEY (id) \
+    )"
   ),
   con.query(
     "CREATE TABLE IF NOT EXISTS practices ( \
-    id INT AUTO_INCREMENT, \
-    driver_signup_id INT NOT NULL DEFAULT 0, \
-    driver_id INT NOT NULL DEFAULT 0, \
-    user_signup_id INT NOT NULL, \
-    user_id INT NOT NULL, \
-    leave_time DATETIME, \
-    is_verified INT NOT NULL DEFAULT 0, \
-    PRIMARY KEY (id) \
-  )"
+      id INT AUTO_INCREMENT, \
+      driver_signup_id INT NOT NULL DEFAULT 0, \
+      driver_id INT NOT NULL DEFAULT 0, \
+      user_signup_id INT NOT NULL, \
+      user_id INT NOT NULL, \
+      leave_time DATETIME, \
+      is_verified INT NOT NULL DEFAULT 0, \
+      PRIMARY KEY (id) \
+    )"
   ),
 ])
   .then(() => console.log("Configured databases"))

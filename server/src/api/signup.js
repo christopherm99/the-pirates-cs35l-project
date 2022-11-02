@@ -16,7 +16,6 @@ router.post("/", requiresAuth, async (req, res) => {
   );
   let queries = [];
   req.body.days_to_practice.forEach((time) => {
-    console.log(time);
     queries.push(
       db.query(
         "INSERT INTO sign_ups (user_id, timestamp, car_capacity, leave_time) VALUES (?, ?, ?, ?)",

@@ -82,6 +82,7 @@ Our options for running in development mode are as follows:
   - Fast, React dev tools work, and all features are natively reachable
   - Everything is unified under one URL
   - Forwarding a websocket seems prone to failure?
+
 Thus it seems that the last option, the one in use, is solution with least
 issues.
 </details>

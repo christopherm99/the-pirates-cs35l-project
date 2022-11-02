@@ -6,8 +6,14 @@ frontend is located in `client/` and the code for the backend is located in
 
 ## Setup
 
+### Dependencies 
+
 Running `npm i` or `npm install` in the top level directory will install
 dependencies for both the server and client. 
+
+### Server setup
+
+See `server/README.md`.
 
 ## Building and Running
 

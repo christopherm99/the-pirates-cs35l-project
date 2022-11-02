@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(
     "/*",
     createProxyMiddleware({
-      target: "http://localhost:3000", // Link to react dev server
+      target: "http://0.0.0.0:3000", // Link to react dev server
       changeOrigin: true, // Just in case this matters
       ws: true, // Websockets for dev server
     })

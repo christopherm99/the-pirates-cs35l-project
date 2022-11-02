@@ -16,6 +16,7 @@ router.post("/", requiresAuth, async (req, res) => {
   );
   let queries = [];
   req.body.days_to_practice.forEach((time) => {
+    console.log(time);
     queries.push(
       db.query(
         "INSERT INTO sign_ups (user_id, timestamp, car_capacity, leave_time) VALUES (?, ?, ?, ?)",
@@ -37,15 +38,18 @@ router.post("/", requiresAuth, async (req, res) => {
     );
     let queries = [];
     if (drivers) {
+      console.log(drivers);
+      console.log(
+        _.groupBy(drivers, (driver) => driver.leave_time.toDateString())
+      );
       _.forEach(
-        _.groupBy(
-          drivers,
-          dayjs(drivers[0].leave_time.toDateString()).toDate()
-        ),
-        async (day, drivers) => {
+        _.groupBy(drivers, (driver) => driver.leave_time.toDateString()),
+        async (drivers, day) => {
+          console.log("DAY:");
+          console.log(day);
           let [passengers] = await db.query(
             "SELECT * FROM sign_ups \
-            WHERE leave_time leave_time >= ? \
+            WHERE leave_time >= ? \
             AND leave_time < ? \
             AND car_capacity = 0 \
             ORDER BY leave_time ASC, timestamp ASC",
@@ -57,7 +61,9 @@ router.post("/", requiresAuth, async (req, res) => {
           drivers.forEach((driver) => {
             let carMembers = passengers.splice(0, driver.car_capacity);
             carMembers.push(driver);
-            passengers.splice(0, driver.car_capacity).forEach((passenger) => {
+            carMembers.forEach((passenger) => {
+              console.log(carMembers);
+              console.log(_.maxBy(carMembers, "leave_time").leave_time);
               queries.push(
                 db.query(
                   "INSERT INTO practices ( \
@@ -72,7 +78,7 @@ router.post("/", requiresAuth, async (req, res) => {
                     driver.user_id,
                     passenger.id,
                     passenger.user_id,
-                    _.maxBy(passengers, "leave_time"),
+                    _.maxBy(carMembers, "leave_time").leave_time,
                   ]
                 )
               );

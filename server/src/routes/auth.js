@@ -20,14 +20,15 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       // Check if this user is already in our database
       // TODO: Use async/await to avoid nested promises
-      db.query("SELECT * FROM users WHERE user_id = ?", profile.id)
+      db.query("SELECT * FROM users WHERE google_id = ?", profile.id)
         .then(([cred]) => {
           if (!cred.length) {
             // User is not registered yet, insert the relevant info
             // TODO: Insert more user data (isadmin and phonenumber)
             db.query(
-              "INSERT INTO users (username, pfp, email) VALUES (?, ?, ?)",
+              "INSERT INTO users (google_id, username, pfp, email) VALUES (?, ?, ?, ?)",
               [
+                profile.id,
                 profile.displayName,
                 profile.photos[0].value,
                 profile.emails[0].value,

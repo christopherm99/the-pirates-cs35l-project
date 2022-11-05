@@ -30,13 +30,14 @@ con.on("connection", function (connection) {
 Promise.all([
   con.query(
     "CREATE TABLE IF NOT EXISTS users ( \
-      id INT AUTO_INCREMENT, \
+      user_id INT AUTO_INCREMENT, \
+      google_id VARCHAR(255), \
       username TEXT, \
       email TEXT, \
       pfp TEXT, \
       isadmin INT DEFAULT 0, \
       phonenumber text, \
-      PRIMARY KEY (id) \
+      PRIMARY KEY (user_id) \
     )"
   ),
   con.query(

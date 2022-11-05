@@ -7,7 +7,10 @@ import { requiresAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Allows users to signup for practices by POSTing JSON.
 router.post("/", requiresAuth, async (req, res) => {
+  // First delete any signups from same user for this week,
+  // allowing user to change their mind.
   await db.query(
     "DELETE FROM sign_ups \
       WHERE user_id = ? \
@@ -15,6 +18,7 @@ router.post("/", requiresAuth, async (req, res) => {
     req.user.user_id
   );
   let queries = [];
+  // Insert into sign_ups for each
   req.body.days_to_practice.forEach((time) => {
     queries.push(
       db.query(
@@ -29,6 +33,11 @@ router.post("/", requiresAuth, async (req, res) => {
     );
   });
   Promise.all(queries).then(async () => {
+    // Deletes old data.
+    await db.query(
+      "DELETE FROM practices \
+        WHERE YEARWEEK(leave_time) = YEARWEEK(NOW())"
+    );
     let [drivers] = await db.query(
       "SELECT * FROM sign_ups \
         WHERE YEARWEEK(leave_time) = YEARWEEK(NOW()) \
@@ -37,15 +46,9 @@ router.post("/", requiresAuth, async (req, res) => {
     );
     let queries = [];
     if (drivers) {
-      console.log(drivers);
-      console.log(
-        _.groupBy(drivers, (driver) => driver.leave_time.toDateString())
-      );
       _.forEach(
         _.groupBy(drivers, (driver) => driver.leave_time.toDateString()),
         async (drivers, day) => {
-          console.log("DAY:");
-          console.log(day);
           let [passengers] = await db.query(
             "SELECT * FROM sign_ups \
             WHERE leave_time >= ? \
@@ -61,8 +64,6 @@ router.post("/", requiresAuth, async (req, res) => {
             let carMembers = passengers.splice(0, driver.car_capacity);
             carMembers.push(driver);
             carMembers.forEach((passenger) => {
-              console.log(carMembers);
-              console.log(_.maxBy(carMembers, "leave_time").leave_time);
               queries.push(
                 db.query(
                   "INSERT INTO practices ( \

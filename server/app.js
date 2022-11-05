@@ -24,7 +24,7 @@ app.use(express.json()); // Auto-converts POST requests with JSON to objects
 // Stores user sessions (cookies) in MySQL
 app.use(
   session({
-    secret: "secret goes here", // TODO: Change this (maybe .env?)
+    secret: "testsecret", // TODO: Change this (maybe .env?)
     resave: false,
     saveUninitialized: false,
     store: new MySQLStore(

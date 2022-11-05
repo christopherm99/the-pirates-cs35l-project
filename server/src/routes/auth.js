@@ -42,7 +42,7 @@ passport.use(
               .catch((err) => cb(err));
           } else {
             // Otherwise, user is registered
-            cb(null, cred);
+            cb(null, cred[0]);
           }
         })
         .catch((err) => cb(err));

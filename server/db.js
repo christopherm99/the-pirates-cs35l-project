@@ -31,7 +31,7 @@ Promise.all([
   con.query(
     "CREATE TABLE IF NOT EXISTS users ( \
       user_id INT AUTO_INCREMENT, \
-      google_id VARCHAR(255), \
+      google_id VARCHAR(255) UNIQUE, \
       username TEXT, \
       email TEXT, \
       pfp TEXT, \

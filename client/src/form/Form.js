@@ -69,14 +69,21 @@ export default function CalendarPage() {
         }
         today.add(1, 'days');
       }
-      console.log("making post request...");
+      console.log("making post request with the following payload:");
       console.log(days_to_practice);
       axios.post(`/api/signup`, {
         days_to_practice,
         car_capacity: parseInt(numSeatsInput) || 0,
       
-      }).then((response) => {
-        window.location.href="/"
+      }).catch(function (error) {
+        if (error.response.status === 403) {
+          setErrorMsg("Please check that you've logged in before submitting this form");
+        }
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.href="/"
+        }
       });
     }
   }

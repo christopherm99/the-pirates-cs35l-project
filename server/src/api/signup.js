@@ -7,7 +7,10 @@ import { requiresAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Allows users to signup for practices by POSTing JSON.
 router.post("/", requiresAuth, async (req, res) => {
+  // First delete any signups from same user for this week,
+  // allowing user to change their mind.
   await db.query(
     "DELETE FROM sign_ups \
       WHERE user_id = ? \
@@ -15,6 +18,7 @@ router.post("/", requiresAuth, async (req, res) => {
     req.user.user_id
   );
   let queries = [];
+  // Insert into sign_ups for each
   req.body.days_to_practice.forEach((time) => {
     queries.push(
       db.query(
@@ -29,6 +33,11 @@ router.post("/", requiresAuth, async (req, res) => {
     );
   });
   Promise.all(queries).then(async () => {
+    // Deletes old data.
+    await db.query(
+      "DELETE FROM practices \
+        WHERE YEARWEEK(leave_time) = YEARWEEK(NOW())"
+    );
     let [drivers] = await db.query(
       "SELECT * FROM sign_ups \
         WHERE YEARWEEK(leave_time) = YEARWEEK(NOW()) \
@@ -38,14 +47,11 @@ router.post("/", requiresAuth, async (req, res) => {
     let queries = [];
     if (drivers) {
       _.forEach(
-        _.groupBy(
-          drivers,
-          dayjs(drivers[0].leave_time.toDateString()).toDate()
-        ),
-        async (day, drivers) => {
+        _.groupBy(drivers, (driver) => driver.leave_time.toDateString()),
+        async (drivers, day) => {
           let [passengers] = await db.query(
             "SELECT * FROM sign_ups \
-            WHERE leave_time leave_time >= ? \
+            WHERE leave_time >= ? \
             AND leave_time < ? \
             AND car_capacity = 0 \
             ORDER BY leave_time ASC, timestamp ASC",
@@ -57,7 +63,7 @@ router.post("/", requiresAuth, async (req, res) => {
           drivers.forEach((driver) => {
             let carMembers = passengers.splice(0, driver.car_capacity);
             carMembers.push(driver);
-            passengers.splice(0, driver.car_capacity).forEach((passenger) => {
+            carMembers.forEach((passenger) => {
               queries.push(
                 db.query(
                   "INSERT INTO practices ( \
@@ -72,7 +78,7 @@ router.post("/", requiresAuth, async (req, res) => {
                     driver.user_id,
                     passenger.id,
                     passenger.user_id,
-                    _.maxBy(passengers, "leave_time"),
+                    _.maxBy(carMembers, "leave_time").leave_time,
                   ]
                 )
               );

@@ -2,6 +2,7 @@ import "./Form.css";
 import Navbar from "../navbar/Navbar";
 import React from "react";
 import axios from "axios";
+import moment from "moment";
 
 
 export default function CalendarPage() {
@@ -11,7 +12,7 @@ export default function CalendarPage() {
 
   const [daysChecked, setDaysChecked] = React.useState([false, false, false, false]);
   const [selectedTimes, setSelectedTimes] = React.useState([null, null, null, null]);
-  const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+  const dayNames = ["Tuesday", "Wednesday", "Thursday", "Friday"];
 
   const [canDrive, setCanDrive] = React.useState(null);
   const [numSeatsInput, setNumSeatsInput] = React.useState("");
@@ -59,17 +60,30 @@ export default function CalendarPage() {
       setErrorMsg(error);
     } else {
       // make post request here
+      const today =  moment().startOf('week'); // This will be a Sunday
+      today.add(2, 'days');
+      const days_to_practice = [];
+      for (let index = 0; index < 4; index ++) {
+        if (selectedTimes[index]) {
+          days_to_practice.push(`${today.format('YYYY-MM-DD')} ${selectedTimes[index]}`)
+        }
+        today.add(1, 'days');
+      }
+      console.log("making post request with the following payload:");
+      console.log(days_to_practice);
       axios.post(`/api/signup`, {
-        days_to_practice: {
-          Tuesday: selectedTimes[0],
-          Wednesday: selectedTimes[1],
-          Thursday: selectedTimes[2],
-          Friday: selectedTimes[3],
-        },
+        days_to_practice,
         car_capacity: parseInt(numSeatsInput) || 0,
       
-      }).then((response) => {
-        window.location.href="/"
+      }).catch(function (error) {
+        if (error.response.status === 403) {
+          setErrorMsg("Please check that you've logged in before submitting this form");
+        }
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.href="/"
+        }
       });
     }
   }
@@ -99,8 +113,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="option1"
-                          checked={selectedTimes[index] === "2:00"}
-                          onChange={() => handleDayTimeUpdate(index, "2:00")}
+                          checked={selectedTimes[index] === "14:00"}
+                          onChange={() => handleDayTimeUpdate(index, "14:00")}
                           className="form-check-input"
                         />
                         2:00
@@ -112,8 +126,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="2:15"
-                          checked={selectedTimes[index] === "2:15"}
-                          onChange={() => handleDayTimeUpdate(index, "2:15")}
+                          checked={selectedTimes[index] === "14:15"}
+                          onChange={() => handleDayTimeUpdate(index, "14:15")}
                           className="form-check-input"
                         />
                         2:15
@@ -125,8 +139,8 @@ export default function CalendarPage() {
                         <input
                           type="radio"
                           value="2:30"
-                          checked={selectedTimes[index] === "2:30"}
-                          onChange={() => handleDayTimeUpdate(index, "2:30")}
+                          checked={selectedTimes[index] === "14:30"}
+                          onChange={() => handleDayTimeUpdate(index, "14:30")}
                           className="form-check-input"
                         />
                         2:30

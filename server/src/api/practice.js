@@ -9,7 +9,7 @@ const router = express.Router();
 
 // returns all data for the current week in json format
 router.get("/", (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // Query database for all practices from this week
   db.query(
     "SELECT * FROM practices \
     WHERE YEARWEEK(leave_time) = YEARWEEK(NOW()) \
@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+// Returns all data for any given week (Date of any day in week)
 router.get("/:week", requiresAuth, (req, res) => {
   db.query(
     "SELECT * FROM practices \
@@ -30,7 +31,9 @@ router.get("/:week", requiresAuth, (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+// Parses raw row data from database into expected JSON.
 async function parseRows(rows) {
+  // Get all info for all referenced users
   let users = {};
   for (const row of rows) {
     if (!users[row.driver_id]) {
@@ -42,12 +45,14 @@ async function parseRows(rows) {
   }
   return _.chain(rows)
     .groupBy((row) =>
+      // Convert dates to weekday names (ie. "Tuesday")
       row.leave_time.toLocaleDateString("en-US", { weekday: "long" })
     )
     .mapValues((day) =>
       _.chain(day)
-        .groupBy("driver_id")
+        .groupBy("driver_id") // Group users under their driver
         .map((val, id) => ({
+          // Insert relevant user data for each user
           driver: {
             name: users[id].username,
             pfp: users[id].pfp,

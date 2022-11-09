@@ -13,7 +13,7 @@ export default function DayColumn({dateString, carsLeaving}) {
           </div>
           <div className="carpools">
             {carsLeaving.map(car => (
-              <CarpoolChip passengers={car.passengers} depart_time={car.depart_time} driver={car.driver} />
+              <CarpoolChip passengers={car.passengers} leave_time={car.leave_time} driver={car.driver} />
             ))}
           </div>
       </div>

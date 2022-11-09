@@ -9,6 +9,8 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: {},
+  rules: {
+    "promise/always-return": [2, { ignoreLastCallback: true }],
+  },
   plugins: ["promise"],
 };

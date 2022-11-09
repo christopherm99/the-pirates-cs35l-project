@@ -45,8 +45,6 @@ export default function Homepage() {
     )
   })
 
-
-  
   return (
     <>
       <Navbar searchWeekButton submitFormButton loginButton/>

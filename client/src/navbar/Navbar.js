@@ -2,7 +2,7 @@ import './Navbar.css';
 import React from 'react';
 import axios from "axios";
 
-export default function Navbar({searchWeekButton, returnHomeButton, submitFormButton, loginButton}) {
+export default function Navbar({searchWeekButton, returnHomeButton, submitFormButton, loginButton, searchMembers}) {
   // searchWeekButton, returnHomeButton, and submitFormButton are each booleans.
   // if the boolean is true, then we show the corresponding button.
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -53,10 +53,14 @@ export default function Navbar({searchWeekButton, returnHomeButton, submitFormBu
         <a className="form-button" href="/submitform">Submit Availability Form</a>
       }
       {searchWeekButton && 
-        <a className="form-button" href="/calendar">Search Past Weeks</a>
+        <a className="form-button" href="/search-weeks">Search Past Weeks</a>
       }
       {returnHomeButton && 
         <a className="form-button" href="/">Home</a>
+      }
+      {searchMembers &&
+      <a className="form-button" href="/search-members"> Search Members</a>
+
       }
     </div>
   )

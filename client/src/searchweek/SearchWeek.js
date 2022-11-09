@@ -8,7 +8,7 @@ import moment from "moment";
 export default function SearchWeek() {
     return (
         <div>
-            <Navbar/>
+            <Navbar searchMembers/>
             <label for="week">Search Week</label>
 
             <input type="week" name="week" id="camp-week" min="2000" required></input>

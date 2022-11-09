@@ -14,7 +14,7 @@ function App() {
 
           {/* These are other pages we will implement in the future */}
           <Route path="/submitform" element={<Form />} />
-          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/search-members" element={<CalendarPage />} />
           <Route path="/search-weeks" element={<SearchWeek />} />
         </Routes>
       </Router>

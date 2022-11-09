@@ -49,8 +49,7 @@ export default function Homepage() {
 
   return (
     <>
-      <a href="/search-weeks">link</a>
-      <Navbar searchWeekButton submitFormButton loginButton/>
+      <Navbar searchWeekButton submitFormButton loginButton searchMembers/>
       <div className="week">
         {cards}
       </div>

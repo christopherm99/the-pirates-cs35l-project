@@ -9,7 +9,7 @@ export default function CalendarPage() {
   // and if the user is not logged in, we should either show an error or redirect them to the home page.
   return (
     <>
-      <Navbar returnHomeButton submitFormButton loginButton/>
+      <Navbar returnHomeButton submitFormButton loginButton searchMembers/>
       <div>
         <SearchMembers />
       </div>

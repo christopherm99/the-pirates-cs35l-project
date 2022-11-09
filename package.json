@@ -21,10 +21,11 @@
     "copy": "ncp client/build/ server/static/",
     "prestart": "npm run build",
     "start": "cd server && NODE_ENV=production npm start",
-    "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm run dev\""
+    "dev": "concurrently --kill-others \"cd client && cross-env BROWSER=none npm start\" \"cd server && npm run dev\""
   },
   "dependencies": {
     "concurrently": "^7.4.0",
+    "cross-env": "^7.0.3",
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
     "rimraf": "^3.0.2"

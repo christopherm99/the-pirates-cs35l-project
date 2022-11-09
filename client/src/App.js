@@ -12,14 +12,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
 
-          {/* These are other pages we will implement in the future */}
           <Route path="/submitform" element={<Form />} />
           <Route path="/search-members" element={<CalendarPage />} />
           <Route path="/search-weeks" element={<SearchWeek />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
   );
+}
+
+function NotFound() {
+  window.location.href="https://linux.ucla.edu/notfound"
 }
 
 export default App;

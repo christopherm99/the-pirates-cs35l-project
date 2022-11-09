@@ -20,7 +20,6 @@ router.get("/all", requiresAuth, (req, res) => {
               ? user.phonenumber
               : undefined,
           pfp: user.pfp,
-          car_capacity: req.isAuthenticated() ? 5 : undefined, // TODO!
         })),
       });
     })
@@ -34,7 +33,6 @@ router.get("/", requiresAuth, (req, res) => {
     email: req.user.email,
     phone: req.user.phonenumber,
     pfp: req.user.pfp,
-    car_capacity: 5, // TODO!
   });
 });
 
@@ -51,7 +49,6 @@ router.get("/:id", (req, res) => {
             ? user.phonenumber
             : undefined,
         pfp: user.pfp,
-        car_capacity: req.isAuthenticated() ? 5 : undefined, // TODO!
       })
     )
     .catch((err) => res.status(400).send(err));

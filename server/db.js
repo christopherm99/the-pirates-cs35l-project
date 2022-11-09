@@ -1,6 +1,6 @@
 import mysql2 from "mysql2/promise";
 
-//////////////// Connection and Set Up ////////////////////////////////////////////////////////////////
+// Load variables from dotenv
 const sql_db = process.env["SQL_DB"];
 const sql_user = process.env["SQL_USER"];
 const sql_pass = process.env["SQL_PASS"];
@@ -15,16 +15,9 @@ const con = mysql2.createPool({
   database: sql_db,
 });
 
-/*
-  con.connect(function (err) {
-      if (err) throw err;
-      console.log("Connected to local SQL!");
-      connectedToLocalSQL = true;
-  });
-  */
+// Debugging connection
 con.on("connection", function (connection) {
   console.log("DB Connection established");
-
   connection.on("error", function (err) {
     console.error(new Date(), "MySQL error", err.code);
   });
@@ -33,39 +26,41 @@ con.on("connection", function (connection) {
   });
 });
 
+// Create tables in MySQL database, if they don't already exist.
 Promise.all([
   con.query(
     "CREATE TABLE IF NOT EXISTS users ( \
-    id INT AUTO_INCREMENT, \
-    username TEXT, \
-    email TEXT, \
-    pfp TEXT, \
-    isadmin INT DEFAULT 0, \
-    phonenumber text, \
-    PRIMARY KEY (id) \
-  )"
+      user_id INT AUTO_INCREMENT, \
+      google_id VARCHAR(255) UNIQUE, \
+      username TEXT, \
+      email TEXT, \
+      pfp TEXT, \
+      isadmin INT DEFAULT 0, \
+      phonenumber text, \
+      PRIMARY KEY (user_id) \
+    )"
   ),
   con.query(
     "CREATE TABLE IF NOT EXISTS sign_ups ( \
-    id INT NOT NULL AUTO_INCREMENT, \
-    user_id INT NOT NULL, \
-    timestamp DATETIME, \
-    car_capacity INT NOT NULL DEFAULT 0, \
-    leave_time DATETIME, \
-    PRIMARY KEY (id) \
-  )"
+      id INT NOT NULL AUTO_INCREMENT, \
+      user_id INT NOT NULL, \
+      timestamp DATETIME, \
+      car_capacity INT NOT NULL DEFAULT 0, \
+      leave_time DATETIME, \
+      PRIMARY KEY (id) \
+    )"
   ),
   con.query(
     "CREATE TABLE IF NOT EXISTS practices ( \
-    id INT AUTO_INCREMENT, \
-    driver_signup_id INT NOT NULL DEFAULT 0, \
-    driver_id INT NOT NULL DEFAULT 0, \
-    user_signup_id INT NOT NULL, \
-    user_id INT NOT NULL, \
-    leave_time DATETIME, \
-    is_verified INT NOT NULL DEFAULT 0, \
-    PRIMARY KEY (id) \
-  )"
+      id INT AUTO_INCREMENT, \
+      driver_signup_id INT NOT NULL DEFAULT 0, \
+      driver_id INT NOT NULL DEFAULT 0, \
+      user_signup_id INT NOT NULL, \
+      user_id INT NOT NULL, \
+      leave_time DATETIME, \
+      is_verified INT NOT NULL DEFAULT 0, \
+      PRIMARY KEY (id) \
+    )"
   ),
 ])
   .then(() => console.log("Configured databases"))

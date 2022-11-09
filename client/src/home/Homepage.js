@@ -9,7 +9,7 @@ export default function Homepage() {
   const [days, setDays] = React.useState({});
 
   React.useEffect(() => {
-    axios.get(`http://localhost:8080/api/practice`).then((response) => {
+    axios.get(`/api/practice`).then((response) => {
       setDays(response.data);
     });
   }, [])
@@ -34,6 +34,8 @@ export default function Homepage() {
       today = firstDayOfCurrentWeek.add(4, 'days');
     } else if (key === "Friday") {
       today = firstDayOfCurrentWeek.add(5, 'days');
+    } else if (key === "Monday") {
+      today = firstDayOfCurrentWeek.add(1, 'days');
     }
     
 

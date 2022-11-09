@@ -22,3 +22,11 @@
   font-size: 25px;
   justify-content: space-around;
 }
+
+.nav--current-user-label {
+  text-align: center;
+  font-weight: 400;
+  font-size: 17px;
+  justify-content: space-around;
+  margin-right: 5px;
+}

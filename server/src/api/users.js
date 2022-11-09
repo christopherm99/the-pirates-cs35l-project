@@ -6,6 +6,27 @@ import { getUser } from "../helpers/users.js";
 
 const router = express.Router();
 
+router.get("/all", requiresAuth, (req, res) => {
+  db.query("SELECT * FROM users").then(([allusers]) => {
+    res
+      .json({
+        all: allusers.map((user) => ({
+          id: user.user_id,
+          name: user.username,
+          email: req.isAuthenticated() ? user.email : undefined,
+          phone:
+            req.isAuthenticated() &&
+            (req.user.isadmin || req.user.user_id === user.id)
+              ? user.phonenumber
+              : undefined,
+          pfp: user.pfp,
+          car_capacity: req.isAuthenticated() ? 5 : undefined, // TODO!
+        })),
+      })
+      .catch((err) => res.status(400).send(err));
+  });
+});
+
 router.get("/", requiresAuth, (req, res) => {
   res.json({
     id: req.user.user_id,
@@ -34,18 +55,6 @@ router.get("/:id", (req, res) => {
       })
     )
     .catch((err) => res.status(400).send(err));
-});
-
-router.get("/all", requiresAuth, (req, res) => {
-    db.query("SELECT * FROM users").then((allusers) => {
-        res.json({
-            all: allusers
-        })
-        .catch((err) => res.status(400).send(err));
-    }
-    );
-    
-    
 });
 
 router.post("/", requiresAuth, (req, res) => {

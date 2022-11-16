@@ -1,75 +1,75 @@
 .form {
-    background-color: white;
-    max-width: 1000px;
-    width: 50%;
-    margin: 10px auto;
-    padding: 20px;
-    height: 1000vh;
-    line-height: 30px;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
-} 
+  background-color: white;
+  max-width: 1000px;
+  width: 50%;
+  margin: 10px auto;
+  padding: 20px;
+  height: 1000vh;
+  line-height: 30px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+}
 
-.form-check-input{
-    margin-right: 10px;
+.form-check-input {
+  margin-right: 10px;
 }
 
 .check-day {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .main-question {
-    background: #D9D9D9;
-    border-radius: 15px;
-    padding: 15px 20px;
-    margin-bottom: 10px;
+  background: #d9d9d9;
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
 }
 
 .mini-question {
-    background: #474747;
-    border-radius: 10px;
-    color: white;
-    padding: 15px 20px;
-    margin: 10px;
+  background: #474747;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 20px;
+  margin: 10px;
 }
 
 .submit {
-    background-color: #496ab8;
-    margin: 0 auto;
-    border-width: 0px;
-    color: white;
-    border-radius: 20px;
-    font-size: 14px;
-    width: 100px;
-    height: 40px;
+  background-color: #496ab8;
+  margin: 0 auto;
+  border-width: 0px;
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  width: 100px;
+  height: 40px;
 }
 
 .submit:hover {
-    background-color: #3d5a9b;
+  background-color: #3d5a9b;
 }
 
 .submit:active {
-    background-color: #31477b;
+  background-color: #31477b;
 }
 
 .button-container {
-    display: flex;
+  display: flex;
 }
 
 .inputtext {
-    padding-left: 5px;
-    padding-right: -5px;
-    width: 100%;
-    background-color: #e4e4e4;
-    border-width: 0px;
-    border-radius: 4px;
-    height: 25px;
-    color: black
+  padding-left: 5px;
+  padding-right: -5px;
+  width: 100%;
+  background-color: #e4e4e4;
+  border-width: 0px;
+  border-radius: 4px;
+  height: 25px;
+  color: black;
 }
 
 .error-message {
-    margin: 20px 0px;
-    background: #ff8a8a;
-    text-align: center;
-    border-radius: 20px;
-    font-weight: bold;
+  margin: 20px 0px;
+  background: #ff8a8a;
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
 }

@@ -1,10 +1,10 @@
-import './App.css';
-import Homepage from './home/Homepage';
-import CalendarPage from './calendar/CalendarPage';
-import Form from './form/Form'
+import "./App.css";
+import Homepage from "./home/Homepage";
+import CalendarPage from "./calendar/CalendarPage";
+import Form from "./form/Form";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchWeek from './searchweek/SearchWeek';
-import Navbar from './navbar/Navbar';
+import SearchWeek from "./searchweek/SearchWeek";
+import Navbar from "./navbar/Navbar";
 import Profile from "./profile/Profile";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 }
 
 function NotFound() {
-  window.location.href="https://linux.ucla.edu/notfound"
+  window.location.href = "https://linux.ucla.edu/notfound";
 }
 
 export default App;

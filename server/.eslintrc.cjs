@@ -11,7 +11,7 @@ module.exports = {
   },
   rules: {
     "promise/always-return": [2, { ignoreLastCallback: true }],
-    "promise/no-callback-in-promise" : 0,
+    "promise/no-callback-in-promise": 0,
   },
   plugins: ["promise"],
 };

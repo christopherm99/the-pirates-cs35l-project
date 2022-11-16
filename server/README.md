@@ -9,7 +9,7 @@ Install dependecies as suggested in `../README.md`.
 ### Pre-requisites
 
 In order for this code to work, one first needs to register the app with Google,
-and also setup a MySQL server. 
+and also setup a MySQL server.
 
 #### Registering with Google
 
@@ -18,8 +18,8 @@ and also setup a MySQL server.
 3. Navigate to "APIs & Services" and select "Credentials".
 4. Configure the OAuth consent screen.
 5. Select "Create Credentials" and select "OAuth client ID".
-6. Configure this, and add URI `http://hostname:port/oauth2/redirect/google` 
-under "Authorized Redirect URIs".
+6. Configure this, and add URI `http://hostname:port/oauth2/redirect/google`
+   under "Authorized Redirect URIs".
 
 #### MySQL
 

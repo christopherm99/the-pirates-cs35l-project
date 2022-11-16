@@ -7,36 +7,37 @@ import db from "../../db.js";
 const router = express.Router();
 
 async function passFun(accessToken, refreshToken, profile, cb) {
-    try {
-        let [cred] = await db.query("SELECT * FROM users WHERE google_id = ?", profile.id);
-        if (!cred.length) {
-            // User is not registered yet, insert the relevant info
-            // TODO: Insert more user data (isadmin and phonenumber)
-            try {
-                let [ret] = await db.query(
-                    "INSERT INTO users (google_id, username, pfp, email) VALUES (?, ?, ?, ?)",
-                    [
-                        profile.id,
-                        profile.displayName,
-                        profile.photos[0].value,
-                        profile.emails[0].value,
-                    ]
-                );
-                cb(null, {
-                    user_id: ret.insertId,
-                });
-            }
-            catch (err) {
-                cb(err)
-            }
-        } else {
-            // Otherwise, user is registered
-            cb(null, cred[0]);
-        }
+  try {
+    let [cred] = await db.query(
+      "SELECT * FROM users WHERE google_id = ?",
+      profile.id
+    );
+    if (!cred.length) {
+      // User is not registered yet, insert the relevant info
+      // TODO: Insert more user data (isadmin and phonenumber)
+      try {
+        let [ret] = await db.query(
+          "INSERT INTO users (google_id, username, pfp, email) VALUES (?, ?, ?, ?)",
+          [
+            profile.id,
+            profile.displayName,
+            profile.photos[0].value,
+            profile.emails[0].value,
+          ]
+        );
+        cb(null, {
+          user_id: ret.insertId,
+        });
+      } catch (err) {
+        cb(err);
+      }
+    } else {
+      // Otherwise, user is registered
+      cb(null, cred[0]);
     }
-    catch (err) {
-        cb(err)
-    }
+  } catch (err) {
+    cb(err);
+  }
 }
 
 // Allows users to login with google oauth
@@ -49,7 +50,8 @@ passport.use(
       callbackURL: "http://localhost:8080/oauth2/redirect/google",
       scope: ["profile", "email"],
       state: true,
-      }, passFun
+    },
+    passFun
   )
 );
 
@@ -64,13 +66,6 @@ passport.deserializeUser((id, cb) => {
   db.query("SELECT * FROM users WHERE user_id = ?", id)
     .then(([user]) => setTimeout(() => cb(null, user[0]), 0))
     .catch((err) => setTimeout(() => cb(err), 0));
-});
-
-// TODO: remove this
-router.get("/login", function (req, res) {
-  res.send(`<h1>Sign in</h1>
-  <a class="button google" href="/login/federated/google">Sign in with Google</a>
-  `);
 });
 
 // Login handler

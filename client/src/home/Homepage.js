@@ -12,46 +12,39 @@ export default function Homepage() {
     axios.get(`/api/practice`).then((response) => {
       setDays(response.data);
     });
-  }, [])
-
+  }, []);
 
   var dayArr = [];
   for (var key in days) {
-      if (days.hasOwnProperty(key)) {
-          dayArr.push( [ key, days[key] ] );
-      }
+    if (days.hasOwnProperty(key)) {
+      dayArr.push([key, days[key]]);
+    }
   }
 
-  const cards = dayArr.map(item => {
+  const cards = dayArr.map((item) => {
     const [key, value] = item;
-    const firstDayOfCurrentWeek =  moment().startOf('week'); // This will be a Sunday
+    const firstDayOfCurrentWeek = moment().startOf("week"); // This will be a Sunday
     let today = null;
     if (key === "Tuesday") {
-      today = firstDayOfCurrentWeek.add(2, 'days');
+      today = firstDayOfCurrentWeek.add(2, "days");
     } else if (key === "Wednesday") {
-      today = firstDayOfCurrentWeek.add(3, 'days');
+      today = firstDayOfCurrentWeek.add(3, "days");
     } else if (key === "Thursday") {
-      today = firstDayOfCurrentWeek.add(4, 'days');
+      today = firstDayOfCurrentWeek.add(4, "days");
     } else if (key === "Friday") {
-      today = firstDayOfCurrentWeek.add(5, 'days');
+      today = firstDayOfCurrentWeek.add(5, "days");
     } else if (key === "Monday") {
-      today = firstDayOfCurrentWeek.add(1, 'days');
+      today = firstDayOfCurrentWeek.add(1, "days");
     }
-    
 
     return (
-      <DayColumn 
-        dateString={today.format("YYYY-MM-DD")}
-        carsLeaving={value}
-      />
-    )
-  })
+      <DayColumn dateString={today.format("YYYY-MM-DD")} carsLeaving={value} />
+    );
+  });
 
   return (
     <>
-      <div className="week">
-        {cards}
-      </div>
+      <div className="week">{cards}</div>
     </>
-  )
+  );
 }

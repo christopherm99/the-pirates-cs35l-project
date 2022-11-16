@@ -29,7 +29,6 @@ export default function SearchWeek() {
 
     return (
         <div>
-            <Navbar />
             <label for="week">Search Week</label>
             <input onChange={(e)=>changeWeek(e.target.value)}type="week" name="week" id="camp-week" min="2000" required></input>
             <div/>

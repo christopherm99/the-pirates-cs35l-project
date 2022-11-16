@@ -49,7 +49,6 @@ export default function Homepage() {
 
   return (
     <>
-      <Navbar searchWeekButton submitFormButton loginButton searchMembers/>
       <div className="week">
         {cards}
       </div>

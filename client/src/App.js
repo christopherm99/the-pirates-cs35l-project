@@ -4,10 +4,12 @@ import CalendarPage from './calendar/CalendarPage';
 import Form from './form/Form'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchWeek from './searchweek/SearchWeek';
+import Navbar from './navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />

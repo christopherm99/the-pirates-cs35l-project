@@ -1,10 +1,10 @@
-
+import './Users.css';
 const Users = ({ users }) => {
     return (
-        <article>
+        <article className="box">
             <h2>{users.name}</h2>
             <p>{users.email}</p>
-            <p>User ID: {users.id}</p>
+            <img className="image" src={users.pfp} referrerpolicy="no-referrer"></img>
         </article>
     )
 }

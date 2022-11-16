@@ -91,7 +91,6 @@ export default function CalendarPage() {
 
   return (
     <>
-      <Navbar returnHomeButton loginButton searchMembers/>
       <div className="form">
         <div className="main-question">
           <div>

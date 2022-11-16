@@ -4,10 +4,13 @@ import CalendarPage from './calendar/CalendarPage';
 import Form from './form/Form'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchWeek from './searchweek/SearchWeek';
+import Navbar from './navbar/Navbar';
+import Profile from "./profile/Profile";
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -15,7 +18,7 @@ function App() {
           <Route path="/submitform" element={<Form />} />
           <Route path="/search-members" element={<CalendarPage />} />
           <Route path="/search-weeks" element={<SearchWeek />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </Router>
     </div>

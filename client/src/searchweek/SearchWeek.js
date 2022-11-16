@@ -25,7 +25,11 @@ export default function SearchWeek() {
 
             let newCards = dayArr.map(item => {
                 const [key, value] = item;
-                const firstDayOfCurrentWeek =  moment().startOf('week'); // This will be a Sunday
+                const firstDayOfCurrentWeek =  moment(getDateObjFromString(weekString)).startOf('week');
+                
+                
+                console.log("first day:" );
+                console.log(firstDayOfCurrentWeek);
                 let today = null;
                 if (key === "Tuesday") {
                 today = firstDayOfCurrentWeek.add(2, 'days');
@@ -64,9 +68,14 @@ export default function SearchWeek() {
     }
 
     function getWeekRange(week){
+        let currentWeek = getDateObjFromString(week);
+        return `${currentWeek.toDateString()} `;
+    }
+
+    function getDateObjFromString(week) {
         let date = week.match(/\b(\w+)\b/g);
         let currentWeek = (new Date(parseInt(date[0]), date[1] - 1, parseInt(date[2])));
-        return `${currentWeek.toDateString()} `;
+        return currentWeek;
     }
 
     return (

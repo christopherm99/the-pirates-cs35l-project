@@ -2,11 +2,11 @@ import './Navbar.css';
 import React from 'react';
 import axios from "axios";
 
-export default function Navbar({searchWeekButton, returnHomeButton, submitFormButton, loginButton, searchMembers}) {
-  // searchWeekButton, returnHomeButton, and submitFormButton are each booleans.
-  // if the boolean is true, then we show the corresponding button.
+export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUserName, setCurrentUserName] = React.useState("");
+
+  const dateNow = new Date();
 
   React.useEffect(() => {
     axios.get(`/api/users`)
@@ -37,30 +37,29 @@ export default function Navbar({searchWeekButton, returnHomeButton, submitFormBu
 
   return (
     <div className="navbar">
-      <div className="nav--months">January 2022</div>
+      <div className="pl-2">
+        <a className="form-button" href="/">Home</a>
+      </div>
+      <div className="nav--months">{dateNow.toLocaleDateString('en-us', { year:"numeric", month:"long"}) }</div>
       {isLoggedIn && <div className="nav--current-user-label">Logged In As {currentUserName}</div>}
-      {loginButton && 
-        <> 
-          {!isLoggedIn && 
-            <a className="form-button" href="http://localhost:8080/login/federated/google">Log In</a>
-          }
-          {isLoggedIn && 
-            <a className="form-button" onClick={handleLogOut}>Log Out</a>
-          }
-        </>
-      }
-      {submitFormButton && 
+
+      <> 
+        {!isLoggedIn && 
+          <a className="form-button" href="http://localhost:8080/login/federated/google">Log In</a>
+        }
+        {isLoggedIn && 
+          <a className="form-button" onClick={handleLogOut}>Log Out</a>
+        }
+      </>
+
+      {isLoggedIn && 
         <a className="form-button" href="/submitform">Submit Availability Form</a>
       }
-      {searchWeekButton && 
+      {isLoggedIn && 
         <a className="form-button" href="/search-weeks">Search Past Weeks</a>
       }
-      {returnHomeButton && 
-        <a className="form-button" href="/">Home</a>
-      }
-      {searchMembers &&
-      <a className="form-button" href="/search-members"> Search Members</a>
-
+      {isLoggedIn &&
+        <a className="form-button" href="/search-members"> Search Members</a>
       }
     </div>
   )

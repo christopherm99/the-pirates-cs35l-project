@@ -11,11 +11,9 @@ const SearchBar = ({ Users, setSearchResults }) => {
     setSearchResults(resultsArray);
   };
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
-        <input type="text" id="search" onChange={handleSearchChange} />
-      </form>
-    </header>
+    <form onSubmit={handleSubmit} className="searchbar">
+      <input type="text" id="search" onChange={handleSearchChange} placeholder="Search Users..."/>
+    </form>
   );
 };
 export default SearchBar;

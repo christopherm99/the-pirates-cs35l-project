@@ -1,7 +1,7 @@
 import Users from "./Users";
 const ListPage = ({ searchResults }) => {
-  const results = searchResults.map((users) => (
-    <Users key={users.id} users={users} />
+  const results = searchResults.map((user) => (
+    <Users key={user.id} user={user} />
   ));
   const content = results?.length ? (
     results

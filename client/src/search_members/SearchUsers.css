@@ -1,4 +1,14 @@
 .list {
-  background: rgb(3, 160, 126);
   flex: 3;
 }
+
+.searchbar-div {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .searchbar {
+  width: 100%;
+} */

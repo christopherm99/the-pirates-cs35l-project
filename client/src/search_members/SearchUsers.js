@@ -17,7 +17,9 @@ function SearchUsers() {
 
   return (
     <>
-      <SearchBar Users={users} setSearchResults={setsearchResults} />
+      <div className="searchbar-div">
+        <SearchBar Users={users} setSearchResults={setsearchResults} />
+      </div>
       <ListPage className="list" searchResults={searchResults} />
     </>
   );

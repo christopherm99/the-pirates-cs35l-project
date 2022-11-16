@@ -49,7 +49,13 @@ export default function SearchWeek() {
         );
       });
 
-      if (newCards.length == 0) {
+      let thisDate = getDateObjFromString(weekString);
+      let today = new Date();
+      console.log(today);
+
+      if (newCards.length == 0 && thisDate > today) {
+        newCards = <div className="warning">😧 WHOOPS 😧<br/>🔥 This week hasn't happened yet 🔥 </div>;
+      } else if (newCards.length == 0 ) {
         newCards = <div className="warning">⚠️☹️ No Rides this Week ☹️⚠️</div>;
       }
       setDisplayCards(newCards);

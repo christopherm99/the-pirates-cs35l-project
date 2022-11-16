@@ -46,10 +46,12 @@
 .warning {
   background-color: #ff8787;
   height: 100px;
-  width: 300px;
+  width: 350px;
   border-radius: 10px;
   font-weight: bold;
-  padding-top: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -72,4 +74,5 @@
   font-weight: bold;
   font-size: 25px;
   text-align: center;
+  
 }

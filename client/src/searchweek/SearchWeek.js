@@ -7,8 +7,8 @@ import axios from "axios";
 import moment from "moment";
 
 export default function SearchWeek() {
-  const [weekString, setWeekString] = React.useState("2022-11-01");
-  const [displayCards, setDisplayCards] = React.useState("blah blach");
+  const [weekString, setWeekString] = React.useState(moment().startOf("week").format("YYYY-MM-DD"));
+  const [displayCards, setDisplayCards] = React.useState("loading display cards...");
 
   React.useEffect(() => {
     axios.get(`/api/practice/${weekString}`).then((resp) => {
@@ -68,8 +68,13 @@ export default function SearchWeek() {
   }
 
   function getWeekRange(week) {
-    let currentWeek = getDateObjFromString(week);
-    return `${currentWeek.toDateString()} `;
+    let currentWeek = moment(getDateObjFromString(week)).startOf("week"); // This is a sunday
+    let currentMonday = currentWeek.clone().add(1, 'days');
+    let currentFriday = currentWeek.clone().add(5, 'days');
+    let mondayString = currentMonday.format('dddd MMM D');
+    let fridayString = currentFriday.format('dddd MMM D');
+    let yearString = currentFriday.format('YYYY')
+    return `${mondayString} to ${fridayString}, ${yearString}`;
   }
 
   function getDateObjFromString(week) {
@@ -84,7 +89,7 @@ export default function SearchWeek() {
 
   return (
     <div>
-      <div className="centerSearch">
+        <div className="centerSearch">
         <div className="centerSearch2">
           <label for="week">Search Week</label>
           <div />

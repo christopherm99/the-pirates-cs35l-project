@@ -5,6 +5,7 @@ import axios from "axios";
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUserName, setCurrentUserName] = React.useState("");
+  const [hamburgerMenu, setHamburgerMenu] = React.useState(false);
 
   const dateNow = new Date();
 
@@ -22,6 +23,23 @@ export default function Navbar() {
       }
     });
   }, []);
+
+  const [windowSize, setWindowSize] = React.useState(getWindowSize());
+  React.useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener('resize', handleWindowResize);
+    console.log(getWindowSize());
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  function hamburger() {
+    console.log(hamburgerMenu)
+    setHamburgerMenu( ! hamburgerMenu );
+  }
 
   const handleLogOut = () => {
     console.log("logging out...");
@@ -67,22 +85,56 @@ export default function Navbar() {
         )}
       </>
 
-      {isLoggedIn && (
+      {isLoggedIn && windowSize.innerWidth > 800 && (
         <a className="form-button" href="/submitform">
           Submit Availability Form
         </a>
       )}
-      {isLoggedIn && (
+      {isLoggedIn && windowSize.innerWidth > 800 && (
         <a className="form-button" href="/search-weeks">
           Search Past Weeks
         </a>
       )}
-      {isLoggedIn && (
+      {isLoggedIn && windowSize.innerWidth > 800 && (
         <a className="form-button" href="/search-members">
           {" "}
           Search Members
         </a>
       )}
+      {windowSize.innerWidth <= 800 && isLoggedIn && 
+      <div class="hamburger" onClick={hamburger}>
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      }
+      {hamburgerMenu && isLoggedIn && windowSize.innerWidth <= 800 && <>
+        <div className="hamburger-menu">
+          {isLoggedIn &&
+           <a className="form-button" href="/submitform">
+          Submit Availability Form
+          </a>
+          }
+          {isLoggedIn &&
+          <a className="form-button" href="/search-weeks">
+          Search Past Weeks
+          </a>
+          }
+          {isLoggedIn &&
+          <a className="form-button" href="/search-members">
+          {" "}
+          Search Members
+        </a>
+        }
+        </div>
+      </>
+      }
     </div>
   );
+}
+
+
+function getWindowSize() {
+  const {innerWidth, innerHeight} = window;
+  return {innerWidth, innerHeight};
 }

@@ -58,7 +58,7 @@ export default function Profile() {
   }
 
   let items = Object.keys(user)
-    .filter((key) => key !== "pfp" && key !== "name" && key !== "id")
+    .filter((key) => key !== "pfp" && key !== "name" && key !== "id" && key !== "bio")
     .map((key) => {
       return (
         <li>

@@ -37,6 +37,7 @@ Promise.all([
       pfp TEXT, \
       isadmin INT DEFAULT 0, \
       phonenumber text, \
+      bio VARCHAR(500), \
       PRIMARY KEY (user_id) \
     )"
   ),

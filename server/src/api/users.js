@@ -20,6 +20,7 @@ router.get("/all", requiresAuth, (req, res) => {
               ? user.phonenumber
               : undefined,
           pfp: user.pfp,
+          bio: user.bio,
         })),
       });
     })
@@ -33,6 +34,7 @@ router.get("/", requiresAuth, (req, res) => {
     email: req.user.email,
     phone: req.user.phonenumber,
     pfp: req.user.pfp,
+    bio: req.user.bio,
   });
 });
 
@@ -49,14 +51,16 @@ router.get("/:id", (req, res) => {
             ? user.phonenumber
             : undefined,
         pfp: user.pfp,
+        bio: user.bio,
       })
     )
     .catch((err) => res.status(400).send(err));
 });
 
 router.post("/", requiresAuth, (req, res) => {
-  db.query("UPDATE users SET phonenumber = ? WHERE user_id = ?", [
+  db.query("UPDATE users SET phonenumber = ?, bio = ? WHERE user_id = ?", [
     req.body.phone,
+    req.body.bio,
     req.user.user_id,
   ])
     .then(res.status(200).send("OK"))

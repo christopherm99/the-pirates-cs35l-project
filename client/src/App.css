@@ -1,6 +1,11 @@
 html,
 body {
-  background: #9bcfff;
+  background-color: #C6E4FF;
+  background-image: url("./../public/sailboat.png");
+  background-repeat: repeat-x;
+  background-size: 500px;
+  background-position-y: center;
+  background-position-x: center;
   height: 100%;
 }
 

@@ -16,3 +16,7 @@
   margin-bottom: 10px;
   width: 40%;
 }
+
+.box:hover {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.10);
+}

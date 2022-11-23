@@ -102,14 +102,14 @@ export default function Navbar() {
         </a>
       )}
       {windowSize.innerWidth <= 800 && isLoggedIn && 
-      <div class="hamburger" onClick={hamburger}>
+      <button class="hamburger" onClick={hamburger} >
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
-      </div>
+      </button>
       }
       {hamburgerMenu && isLoggedIn && windowSize.innerWidth <= 800 && <>
-        <div className="hamburger-menu">
+        <button className="hamburger-menu" >
           {isLoggedIn &&
            <a className="form-button" href="/submitform">
           Submit Availability Form
@@ -126,7 +126,7 @@ export default function Navbar() {
           Search Members
         </a>
         }
-        </div>
+        </button>
       </>
       }
     </div>

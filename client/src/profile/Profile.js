@@ -109,8 +109,8 @@ export default function Profile() {
             onChange={({ target: { value } }) => setCurrentBio(value)}
             rows="15"
             cols="200"
-          >
-          </textarea>
+            style={{backgroundColor:"white"}}
+          />
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 w-fit rounded"
             onClick={() => updateBio()}

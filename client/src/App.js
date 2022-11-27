@@ -25,8 +25,4 @@ function App() {
   );
 }
 
-function NotFound() {
-  window.location.href = "https://linux.ucla.edu/notfound";
-}
-
 export default App;

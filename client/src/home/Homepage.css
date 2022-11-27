@@ -1,5 +1,3 @@
-
-
 @media (min-width: 1024px) {
   .week {
     justify-content: center;
@@ -7,68 +5,4 @@
     height: 100%;
     padding: 20px;
   }
-  
-  .day {
-    padding: 8px;
-    margin: 8px;
-    width: 125px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 11px;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .date-num {
-    text-align: center;
-    font-weight: 300;
-    font-size: 25px;
-    line-height: 30px;
-    text-align: center;
-    color: #000000;
-  }
-  
-  .week-day {
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-    color: #3a3a3a;
-    padding-bottom: 7px;
-    border-bottom: 1px solid #cdcdcd;
-  }
-  
-  .carpools {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 }
-
-/* .Carpool {
-  background: #E8B8FF;
-  border-radius: 14px;
-  padding: 4px 10px 6px 10px;
-  margin: 4px 0px;
-}
-
-.carpool--time {
-  font-weight: 300;
-  font-size: 30px 
-}
-
-.carpool--driver-display{
-  font-weight: 300;
-  font-size: 15px;
-  margin: 4px 0px;
-}
-
-.carpooler{
-  font-weight: 300;
-  font-size: 11px;
-  margin: 2px 0px;
-  line-height: 9px;
-  margin: 4px 0px;
-} */

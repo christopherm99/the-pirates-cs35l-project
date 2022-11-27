@@ -1,6 +1,5 @@
 import "./Homepage.css";
 import DayColumn from "./DayColumn.js";
-import Navbar from "../navbar/Navbar";
 import React from "react";
 import axios from "axios";
 import moment from "moment";

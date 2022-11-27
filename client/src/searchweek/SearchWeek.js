@@ -1,7 +1,5 @@
 import "./SearchWeek.css";
-import Navbar from "../navbar/Navbar";
 import DayColumn from "../home/DayColumn";
-import CarpoolChip from "../home/CarpoolChip";
 import React from "react";
 import axios from "axios";
 import moment from "moment";
@@ -53,9 +51,9 @@ export default function SearchWeek() {
       let today = new Date();
       console.log(today);
 
-      if (newCards.length == 0 && thisDate > today) {
+      if (newCards.length === 0 && thisDate > today) {
         newCards = <div className="warning">😧 WHOOPS 😧<br/>🔥 This week hasn't happened yet 🔥 </div>;
-      } else if (newCards.length == 0 ) {
+      } else if (newCards.length === 0 ) {
         newCards = <div className="warning">⚠️☹️ No Rides this Week ☹️⚠️</div>;
       }
       setDisplayCards(newCards);

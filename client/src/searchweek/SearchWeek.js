@@ -10,11 +10,18 @@ export default function SearchWeek() {
 
   React.useEffect(() => {
     axios.get(`/api/practice/${weekString}`).then((resp) => {
+
+      // an array where each element represents a day of the current week
       var dayArr = [];
       var days = resp.data;
-      for (var key in days) {
+      let currentWeekHasPractices = false;
+      const daysOfWeek = ["Tuesday", "Wednesday", "Thursday", "Friday"];
+      for (var key of daysOfWeek) {
         if (days.hasOwnProperty(key)) {
           dayArr.push([key, days[key]]);
+          currentWeekHasPractices = true;
+        } else {
+          dayArr.push([key, []]);
         }
       }
 
@@ -22,10 +29,8 @@ export default function SearchWeek() {
         const [key, value] = item;
         const firstDayOfCurrentWeek = moment(
           getDateObjFromString(weekString)
-        ).startOf("week");
+        ).startOf("week"); // This will be a Sunday
 
-        console.log("first day:");
-        console.log(firstDayOfCurrentWeek);
         let today = null;
         if (key === "Tuesday") {
           today = firstDayOfCurrentWeek.add(2, "days");
@@ -36,6 +41,7 @@ export default function SearchWeek() {
         } else if (key === "Friday") {
           today = firstDayOfCurrentWeek.add(5, "days");
         } else if (key === "Monday") {
+          // This should never happen, since we don't support Monday
           today = firstDayOfCurrentWeek.add(1, "days");
         }
 
@@ -51,9 +57,9 @@ export default function SearchWeek() {
       let today = new Date();
       console.log(today);
 
-      if (newCards.length === 0 && thisDate > today) {
+      if (thisDate > today) {
         newCards = <div className="warning">😧 WHOOPS 😧<br/>🔥 This week hasn't happened yet 🔥 </div>;
-      } else if (newCards.length === 0 ) {
+      } else if (!currentWeekHasPractices) {
         newCards = <div className="warning">⚠️☹️ No Rides this Week ☹️⚠️</div>;
       }
       setDisplayCards(newCards);

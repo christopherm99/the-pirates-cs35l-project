@@ -14,7 +14,7 @@ export default function Navbar() {
       // we query the /api/users endpoint to see if we are currently logged in or not.
       // The endpoint returns data about the current user if we are logged in,
       // and gives a 403 error if we are not.
-      console.log(response);
+
       if (response.status === 200) {
         setIsLoggedIn(true);
         setCurrentUserName(response.data.name);
@@ -30,22 +30,19 @@ export default function Navbar() {
       setWindowSize(getWindowSize());
     }
     window.addEventListener('resize', handleWindowResize);
-    console.log(getWindowSize());
+
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
 
   function hamburger() {
-    console.log(hamburgerMenu)
+
     setHamburgerMenu( ! hamburgerMenu );
   }
 
   const handleLogOut = () => {
-    console.log("logging out...");
-    axios.post("/logout").then((response) => {
-      console.log("logged out");
-      console.log(response);
+    axios.post("/logout").then(() => {
       window.location.href = "/";
     });
   };

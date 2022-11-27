@@ -79,7 +79,11 @@ export default function Navbar() {
           </a>
         )}
         {isLoggedIn && (
-          <a className="form-button" onClick={handleLogOut}>
+          <a 
+            className="form-button"
+            onClick={handleLogOut}
+            href="/"
+          >
             Log Out
           </a>
         )}

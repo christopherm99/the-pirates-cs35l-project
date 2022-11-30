@@ -1,3 +1,4 @@
+import './SearchBar.css'
 const SearchBar = ({ Users, setSearchResults }) => {
   const handleSubmit = (e) => e.preventDefault();
   const handleSearchChange = (e) => {
@@ -12,7 +13,7 @@ const SearchBar = ({ Users, setSearchResults }) => {
   };
   return (
     <form onSubmit={handleSubmit} className="searchbar">
-      <input type="text" id="search" onChange={handleSearchChange} placeholder="Search Users..."/>
+      <input className="search-users" type="text" id="search" onChange={handleSearchChange} placeholder="Search Users..."/>
     </form>
   );
 };

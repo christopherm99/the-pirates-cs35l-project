@@ -61,7 +61,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     <div
       className={chipColor}
     >
-        {hasLeaveTime && 
+        {hasLeaveTime && driverName && 
           <div className="font-light text-lg">
             {leaveTimeString}
           </div>

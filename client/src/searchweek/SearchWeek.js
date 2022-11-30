@@ -120,7 +120,7 @@ export default function SearchWeek() {
   }
 
   return (
-    <div classname="search-and-wave-animation">
+    <div>
         <div className="centerSearch">
           <button className="next-week" onClick={() => incrementWeek(true)}>⇦</button>
           <div className="centerSearch2">
@@ -141,7 +141,8 @@ export default function SearchWeek() {
       <div />
       <div className="week">{displayCards}      
       </div>
-      <Wave fill="url(#gradient)" speed="0.3">
+      <div className="bottom-box"/>
+      <Wave className="wave" fill="url(#gradient)" speed="0.3">
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(90)">
             <stop offset="10%"  stopColor="#5EC3D9" />

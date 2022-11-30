@@ -21,12 +21,7 @@
   align-content :space-around;
   margin: auto;
 }
-.search-and-wave-animation{
-  flex-direction : column;
-  flex: 1;
-  position : sticky;
-  display : flex;
-}
+
 .centerSearch {
   margin-top: 20px;
   width: 100%;
@@ -61,4 +56,15 @@
 
 .next-week:hover {
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+}
+
+.bottom-box{
+  height: 100px;
+}
+
+.wave {
+  height: 100px; 
+  position: fixed; 
+  bottom:0%;
+  width:100%; 
 }

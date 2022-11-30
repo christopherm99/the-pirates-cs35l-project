@@ -1,14 +1,14 @@
 .box {
-  background: white;
-  /* flex: 3; */
+  background: #ffffff;
   width: 15em;
   height: 10em;
   margin: 0;
   margin-top: 10px;
+  margin-right: 10px;
   text-align: center;
   border-collapse: separate;
-  border-radius: 5px;
-  /* align-items: left; */
+  border-radius: 10px;
+  /* border-color: #466582; */
   flex-direction: row; 
 }
 

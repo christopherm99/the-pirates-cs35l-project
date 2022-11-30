@@ -14,6 +14,6 @@ const ListPage = ({ searchResults }) => {
       </div>
     </article>
   );
-  return <main>{content}</main>;
+  return <main align-items="center">{content}</main>;
 };
 export default ListPage;

@@ -15,7 +15,7 @@ function SearchUsers() {
   }, []);
 
   return (
-    <div className="search-bar">
+    <div className="searchbar-container">
       <div className="searchbar-div">
         <SearchBar Users={users} setSearchResults={setsearchResults} />
       </div>

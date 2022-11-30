@@ -61,8 +61,6 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     <div
       className={chipColor}
     >
-      
-
         {hasLeaveTime && 
           <div className="font-light text-lg">
             {leaveTimeString}
@@ -73,7 +71,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
           <div className="font-light text-sm mx-0 my-1">{driverName}'s car:</div>
         }
         {!driverName &&
-          <div className="font-light text-sm mx-0 my-1">Currently Carless:</div>
+          <div className="font-light text-sm mx-0 my-1">Carless:</div>
         }
         <div className={innerChipColor}>
         {

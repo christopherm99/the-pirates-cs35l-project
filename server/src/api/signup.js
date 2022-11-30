@@ -62,7 +62,7 @@ router.post("/", requiresAuth, async (req, res) => {
               ]
             );
             drivers.forEach((driver) => {
-              let carMembers = passengers.splice(0, driver.car_capacity);
+              let carMembers = passengers.splice(0, driver.car_capacity - 1);
               carMembers.push(driver);
               carMembers.forEach((passenger) => {
                 queries.push(

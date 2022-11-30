@@ -27,6 +27,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     driverName = null;
   }
 
+  // main chip color
   let chipColors = [  
     "bg-red-300",
     "bg-orange-200",
@@ -34,6 +35,16 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     "bg-yellow-200",
     "bg-green-300",
     "bg-purple-300"
+  ]
+
+  // colors for carpools
+  let innerChipColors = [  
+    "bg-red-200",
+    "bg-orange-100",
+    "bg-blue-200",
+    "bg-yellow-100",
+    "bg-green-200",
+    "bg-purple-200"
   ]
   
   let passengerString = "";
@@ -45,28 +56,32 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
   let string_hash = Math.abs(stringToHash(leave_time + passengerString + driver.name)) % (chipColors.length);
   console.log(string_hash)
   let chipColor = chipColors[string_hash] +  " pt-1 pb-1.5 px-2.5 my-1 mx-0 rounded-xl";
-
+  let innerChipColor = innerChipColors[string_hash] + " p-1 rounded mb-1";
   return (
     <div
       className={chipColor}
     >
-      {hasLeaveTime && 
-        <div className="font-light text-lg">
-          {leaveTimeString}
-        </div>
-      }
+        {hasLeaveTime && 
+          <div className="font-light text-lg">
+            {leaveTimeString}
+          </div>
+        }
 
-      {driverName &&
-        <div className="font-light text-sm mx-0 my-1">{driverName}'s car:</div>
-      }
-      {!driverName &&
-        <div className="font-light text-sm mx-0 my-1">Currently Carless:</div>
-      }
-      {passengers.map((passenger) => (
-        <div className="font-light text-xs mx-0 my-[0.5] leading-3 py-0.5">
-          {passenger.name}
-        </div>
-      ))}
+        {driverName &&
+          <div className="font-light text-sm mx-0 my-1">{driverName}'s car:</div>
+        }
+        {!driverName &&
+          <div className="font-light text-sm mx-0 my-1">Carless:</div>
+        }
+        <div className={innerChipColor}>
+        {
+          passengers.map((passenger) => (
+          <div className="font-light text-xs mx-0 my-[0.5] leading-3 py-0.5">
+            {passenger.name}
+          </div>
+          ))
+        }
+      </div>
     </div>
   );
 };

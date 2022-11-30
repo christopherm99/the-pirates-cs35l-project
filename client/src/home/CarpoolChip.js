@@ -13,6 +13,15 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     "bg-green-300",
     "bg-purple-300"
   ]
+
+  let innerChipColors = [  
+    "bg-red-200",
+    "bg-orange-100",
+    "bg-blue-200",
+    "bg-yellow-100",
+    "bg-green-200",
+    "bg-purple-200"
+  ]
   
   let passengerString = "";
   for (let i of passengers) {
@@ -23,7 +32,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
   let string_hash = Math.abs(stringToHash(leave_time + passengerString + driver.name)) % (chipColors.length);
   console.log(string_hash)
   let chipColor = chipColors[string_hash] +  " pt-1 pb-1.5 px-2.5 my-1 mx-0 rounded-xl";
-
+  let innerChipColor = innerChipColors[string_hash] + " p-1 rounded mb-1";
   return (
     <div
       className={chipColor}
@@ -32,11 +41,15 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
         {date.toLocaleDateString(undefined, options)}
       </div>
       <div className="font-light text-sm mx-0 my-1">{driver.name}'s car</div>
+      <div></div>
+      
+      <div className={innerChipColor}>
       {passengers.map((passenger) => (
         <div className="font-light text-xs mx-0 my-[0.5] leading-3 py-0.5">
           {passenger.name}
-        </div>
+      </div>
       ))}
+      </div>
     </div>
   );
 };

@@ -88,11 +88,11 @@ router.post("/", requiresAuth, async (req, res) => {
             passengers.forEach((passenger) => {
               queries.push(
                 db.query(
-                  "INSERT INTO PRACTICES ( \
+                  "INSERT INTO practices ( \
                 user_signup_id, \
                 user_id, \
                 leave_time \
-              ) VALUES (?, ?, ?, ?, ?)",
+              ) VALUES (?, ?, ?)",
                   [passenger.id, passenger.user_id, passenger.leave_time]
                 )
               );

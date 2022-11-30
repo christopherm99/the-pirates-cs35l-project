@@ -106,23 +106,38 @@ export default function SearchWeek() {
     return currentWeek;
   }
 
+  function incrementWeek(backwards) {
+    console.log(weekString)
+    let date = weekString.match(/\b(\w+)\b/g);
+    let thisdate = new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]));
+    if(backwards) {
+      thisdate.setDate(thisdate.getDate() - 7);
+    } else {
+      thisdate.setDate(thisdate.getDate() + 7);
+    }
+    let newDateString = `${thisdate.getFullYear()}-${thisdate.getMonth() + 1}-${thisdate.getDate()}`
+    setWeekString(newDateString)
+  }
+
   return (
     <div classname="search-and-wave-animation">
         <div className="centerSearch">
-        <div className="centerSearch2">
-          <label for="week">Search Week</label>
-          <div />
-          <input
-            onChange={(e) => changeWeek(e.target.value)}
-            type="week"
-            name="week"
-            id="camp-week"
-            min="2000"
-            required
-          ></input>
-          <div className="weekdate">{getWeekRange(weekString)}</div>
+          <button className="next-week" onClick={() => incrementWeek(true)}>⇦</button>
+          <div className="centerSearch2">
+            <label for="week">Search Week</label>
+            <div />
+            <input
+              onChange={(e) => changeWeek(e.target.value)}
+              type="week"
+              name="week"
+              id="camp-week"
+              min="2000"
+              required
+            ></input>
+            <div className="weekdate">{getWeekRange(weekString)}</div>
+          </div>
+        <button className="next-week" onClick={() => incrementWeek(false)}>⇨</button>
         </div>
-      </div>
       <div />
       <div className="week">{displayCards}      
       </div>

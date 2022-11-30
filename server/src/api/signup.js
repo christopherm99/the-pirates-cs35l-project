@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 
 import db from "../../db.js";
 import { requiresAuth } from "../middleware/auth.js";
+import moment from "moment";
 
 const router = express.Router();
 
@@ -99,7 +100,52 @@ router.post("/", requiresAuth, async (req, res) => {
             });
           }
         );
-      }
+        }
+
+        let drivers_by_date;
+        if (drivers) {
+            drivers_by_date = _.groupBy(drivers, driver => driver.leave_time.toDateString());
+        }
+        else {
+            drivers_by_date = {}
+        }
+
+        const firstDayOfCurrentWeek = moment().startOf("week"); // This will be a Sunday
+        let all_days = [];
+        all_days.push(firstDayOfCurrentWeek.add(2, "days").format("ddd MMM DD YYYY")); // Tuesday
+        all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Wednesday
+        all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Thursday
+        all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Friday
+        console.log(all_days);
+        for (let i = 0; i < all_days.length; i++) {
+            if (!drivers_by_date[all_days[i]]) {
+                // add all current signups to a null car
+                let [passengers] = await db.query(
+                    "SELECT * FROM sign_ups \
+            WHERE leave_time >= ? \
+            AND leave_time < ? \
+            AND car_capacity = 0 \
+            ORDER BY leave_time ASC, timestamp ASC",
+                    [
+                        dayjs(all_days[i]).startOf("day").toDate(),
+                        dayjs(all_days[i]).endOf("day").toDate(),
+                    ]
+                );
+                passengers.forEach((passenger) => {
+                    queries.push(
+                        db.query(
+                            "INSERT INTO practices ( \
+                                user_signup_id, \
+                                user_id, \
+                                leave_time \
+                              ) VALUES (?, ?, ?)",
+                            [passenger.id, passenger.user_id, passenger.leave_time]
+                        )
+                    );
+                });
+            }
+        }
+
       return Promise.all(queries);
     })
     .then(() => res.status(200).send("OK"))

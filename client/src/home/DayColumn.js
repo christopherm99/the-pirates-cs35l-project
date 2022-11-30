@@ -9,6 +9,17 @@ export default function DayColumn({ dateString, carsLeaving }) {
 
   let dateMomentObj = moment(dateString);
 
+  carsLeaving = carsLeaving.sort(
+    function(a, b) {
+      if (carHasDriver(a) && !carHasDriver(b)) {
+        return -1;
+      } else if (!carHasDriver(a) && carHasDriver(b)) {
+        return 1;
+      }
+      return 0;
+    }
+  );
+
   // styles are from Homepage.css
   return (
     <div className="day">
@@ -21,7 +32,16 @@ export default function DayColumn({ dateString, carsLeaving }) {
         </div>
       </div>
       <div className="carpools">
-        {carsLeaving.map((car) => (
+        {carsLeaving.filter(car => carHasDriver(car)).map((car) => (
+          <CarpoolChip
+            passengers={car.passengers}
+            leave_time={car.leave_time}
+            driver={car.driver}
+          />
+        ))}
+      </div>
+      <div>
+        {carsLeaving.filter(car => !carHasDriver(car)).map((car) => (
           <CarpoolChip
             passengers={car.passengers}
             leave_time={car.leave_time}
@@ -31,4 +51,8 @@ export default function DayColumn({ dateString, carsLeaving }) {
       </div>
     </div>
   );
+}
+
+function carHasDriver(car) {
+  return car && car.driver && car.driver.name;
 }

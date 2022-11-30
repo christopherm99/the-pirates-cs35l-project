@@ -4,7 +4,9 @@ const ListPage = ({ searchResults }) => {
     <Users key={user.id} user={user} />
   ));
   const content = results?.length ? (
-    results
+    <div className="list-container">
+      {results}
+    </div>
   ) : (
     <article>
       <div className="centerSearch">
@@ -12,6 +14,6 @@ const ListPage = ({ searchResults }) => {
       </div>
     </article>
   );
-  return <main>{content}</main>;
+  return <main align-items="center">{content}</main>;
 };
 export default ListPage;

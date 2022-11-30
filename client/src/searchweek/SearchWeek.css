@@ -12,6 +12,15 @@
   margin-left: auto;
 }
 
+.list-container{
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  align-items: center;
+  align-content :space-around;
+  margin: auto;
+}
 .centerSearch {
   margin-top: 20px;
   width: 100%;

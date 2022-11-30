@@ -116,7 +116,6 @@ router.post("/", requiresAuth, async (req, res) => {
         all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Wednesday
         all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Thursday
         all_days.push(firstDayOfCurrentWeek.add(1, "days").format("ddd MMM DD YYYY")); // Friday
-        console.log(all_days);
         for (let i = 0; i < all_days.length; i++) {
             if (!drivers_by_date[all_days[i]]) {
                 // add all current signups to a null car
@@ -145,7 +144,6 @@ router.post("/", requiresAuth, async (req, res) => {
                 });
             }
         }
-
       return Promise.all(queries);
     })
     .then(() => res.status(200).send("OK"))

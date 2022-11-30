@@ -143,7 +143,7 @@ export default function SearchWeek() {
       <div className="week">
         {displayCards}
       </div>
-      <div className="bottom-box"/>
+
     </div>
   );
 }

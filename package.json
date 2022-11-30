@@ -28,6 +28,7 @@
     "cross-env": "^7.0.3",
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
+    "react-wavify": "^1.6.3",
     "rimraf": "^3.0.2"
   }
 }

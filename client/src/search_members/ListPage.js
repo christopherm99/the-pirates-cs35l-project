@@ -4,7 +4,9 @@ const ListPage = ({ searchResults }) => {
     <Users key={user.id} user={user} />
   ));
   const content = results?.length ? (
-    results
+    <div className="list-container">
+      {results}
+    </div>
   ) : (
     <article>
       <div className="centerSearch">

@@ -10,6 +10,13 @@
   text-align: center;
 }
 
+.list-container{
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  align-items: center;
+}
 .centerSearch {
   margin-top: 20px;
   width: 100%;

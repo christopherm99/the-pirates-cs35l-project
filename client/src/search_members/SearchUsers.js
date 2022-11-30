@@ -11,17 +11,16 @@ function SearchUsers() {
     axios.get(`/api//users/all`).then((response) => {
       setUsers(response.data.all);
       setsearchResults(response.data.all);
-      console.log(response.data.all);
     });
   }, []);
 
   return (
-    <>
+    <div className="search-bar">
       <div className="searchbar-div">
         <SearchBar Users={users} setSearchResults={setsearchResults} />
       </div>
       <ListPage className="list" searchResults={searchResults} />
-    </>
+    </div>
   );
 }
 

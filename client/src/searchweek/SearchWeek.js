@@ -25,6 +25,8 @@ export default function SearchWeek() {
         }
       }
 
+      // cycles through the days in the week from the database, and creates the day cards
+      // accordingly
       let newCards = dayArr.map((item) => {
         const [key, value] = item;
         const firstDayOfCurrentWeek = moment(
@@ -57,6 +59,7 @@ export default function SearchWeek() {
       let today = new Date();
       console.log(today);
 
+      // error messages for when rides cannot occur
       if (thisDate > today) {
         newCards = <div className="warning">😧 WHOOPS 😧<br/>🔥 This week hasn't happened yet 🔥 </div>;
       } else if (!currentWeekHasPractices) {
@@ -65,6 +68,11 @@ export default function SearchWeek() {
       setDisplayCards(newCards);
     });
   }, [weekString]);
+
+  // takes in a week-string from a week type input, and updates the weekstring state
+  // since these two are different formats
+  // for example:
+  // 2022-W45 -> 2022-11-7
 
   function changeWeek(week) {
     let date = week.match(/\b(\w+)\b/g);

@@ -127,6 +127,7 @@ export default function SearchWeek() {
             <label for="week">Search Week</label>
             <div />
             <input
+              className="search-users"
               onChange={(e) => changeWeek(e.target.value)}
               type="week"
               name="week"

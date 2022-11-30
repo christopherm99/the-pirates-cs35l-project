@@ -3,6 +3,7 @@ import DayColumn from "../home/DayColumn";
 import React from "react";
 import axios from "axios";
 import moment from "moment";
+import Wave from 'react-wavify';
 
 export default function SearchWeek() {
   const [weekString, setWeekString] = React.useState(moment().startOf("week").format("YYYY-MM-DD"));
@@ -143,14 +144,6 @@ export default function SearchWeek() {
         {displayCards}
       </div>
       <div className="bottom-box"/>
-      <Wave className="wave" fill="url(#gradient)" speed="0.3">
-        <defs>
-          <linearGradient id="gradient" gradientTransform="rotate(90)">
-            <stop offset="10%"  stopColor="#5EC3D9" />
-            <stop offset="90%" stopColor="#466582" />
-          </linearGradient>
-        </defs>
-      </Wave>
     </div>
   );
 }

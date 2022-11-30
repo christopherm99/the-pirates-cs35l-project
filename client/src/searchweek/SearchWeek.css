@@ -47,3 +47,18 @@
   font-size: 25px;
   text-align: center;
 }
+
+.next-week {
+  background: #466582;
+  padding: 5px;
+  margin: 0px 5px;
+  border-radius: 30px;
+  font-size: 2em;
+  height: 60px;
+  width: 60px;
+  color: white;
+}
+
+.next-week:hover {
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+}

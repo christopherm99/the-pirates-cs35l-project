@@ -8,6 +8,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .list-container{

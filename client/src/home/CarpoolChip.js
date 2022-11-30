@@ -1,9 +1,31 @@
 import React from "react";
 
 const CarpoolChip = ({ passengers, leave_time, driver }) => {
-  const date = new Date(leave_time);
+  // Some CarpoolChips might not have a leaveTime because they represent the set of all sailors
+  // who do not yet have a car.
+  const hasLeaveTime = !!leave_time;
+  let leaveTimeString = "";
+  if (hasLeaveTime) {
+    const date = new Date(leave_time);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    let AM_PM;
+    if (hours > 12) {
+      hours -= 12;
+      AM_PM = "PM";
+    } else {
+      AM_PM = "AM";
+    }
+    // we use padStart because we want the time to show as "2:00" and not "2:0" for 2 p.m.
+    leaveTimeString = `${hours}:${String(minutes).padStart(2, "0")} ${AM_PM}`;
+  }
 
-  const options = { hour: "numeric", minute: "numeric" };
+  let driverName = null;
+  if (driver !== null) {
+    driverName = driver.name;
+  } else {
+    driverName = null;
+  }
 
   let chipColors = [  
     "bg-red-300",
@@ -28,10 +50,18 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     <div
       className={chipColor}
     >
-      <div className="font-light text-lg">
-        {date.toLocaleDateString(undefined, options)}
-      </div>
-      <div className="font-light text-sm mx-0 my-1">{driver.name}'s car</div>
+      {hasLeaveTime && 
+        <div className="font-light text-lg">
+          {leaveTimeString}
+        </div>
+      }
+
+      {driverName &&
+        <div className="font-light text-sm mx-0 my-1">{driverName}'s car:</div>
+      }
+      {!driverName &&
+        <div className="font-light text-sm mx-0 my-1">Currently Carless:</div>
+      }
       {passengers.map((passenger) => (
         <div className="font-light text-xs mx-0 my-[0.5] leading-3 py-0.5">
           {passenger.name}

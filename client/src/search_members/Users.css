@@ -1,5 +1,5 @@
 .box {
-  background: rgb(204, 240, 201);
+  background: white;
   flex: 3;
   width: 15em;
   height: 10em;
@@ -7,6 +7,7 @@
   margin-top: 10px;
   text-align: center;
   border-collapse: separate;
+  border-radius: 5px;
 }
 
 .image {

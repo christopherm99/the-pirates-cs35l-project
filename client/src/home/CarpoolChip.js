@@ -5,6 +5,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
 
   const options = { hour: "numeric", minute: "numeric" };
 
+  // main chip color
   let chipColors = [  
     "bg-red-300",
     "bg-orange-200",
@@ -14,6 +15,7 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     "bg-purple-300"
   ]
 
+  // colors for carpools
   let innerChipColors = [  
     "bg-red-200",
     "bg-orange-100",

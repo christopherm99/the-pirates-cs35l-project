@@ -3,7 +3,6 @@ import DayColumn from "../home/DayColumn";
 import React from "react";
 import axios from "axios";
 import moment from "moment";
-import Wave from 'react-wavify';
 
 export default function SearchWeek() {
   const [weekString, setWeekString] = React.useState(moment().startOf("week").format("YYYY-MM-DD"));

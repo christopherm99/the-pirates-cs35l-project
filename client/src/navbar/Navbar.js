@@ -24,6 +24,7 @@ export default function Navbar() {
     });
   }, []);
 
+  // updates windoesize state whenever windowsize is updated
   const [windowSize, setWindowSize] = React.useState(getWindowSize());
   React.useEffect(() => {
     function handleWindowResize() {
@@ -86,6 +87,7 @@ export default function Navbar() {
         )}
       </>
 
+          {/* only renders when the window is greater than a certain size */}
       {isLoggedIn && windowSize.innerWidth > 800 && (
         <a className="form-button" href="/submitform">
           Submit Availability Form
@@ -109,6 +111,7 @@ export default function Navbar() {
         <div class="bar3"></div>
       </button>
       }
+      {/* elements that only get rendered when the hamburger menu is selected  */}
       {hamburgerMenu && isLoggedIn && windowSize.innerWidth <= 800 && <>
         <button className="hamburger-menu" >
           {isLoggedIn &&

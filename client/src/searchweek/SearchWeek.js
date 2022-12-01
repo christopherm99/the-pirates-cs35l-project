@@ -85,6 +85,7 @@ export default function SearchWeek() {
     getWeekRange(week);
   }
 
+  // returns the the range of the week to be displayed on the page
   function getWeekRange(week) {
     let currentWeek = moment(getDateObjFromString(week)).startOf("week"); // This is a sunday
     let currentMonday = currentWeek.clone().add(1, 'days');
@@ -95,6 +96,7 @@ export default function SearchWeek() {
     return `${mondayString} to ${fridayString}, ${yearString}`;
   }
 
+  // takes in a weekString style string
   function getDateObjFromString(week) {
     let date = week.match(/\b(\w+)\b/g);
     let currentWeek = new Date(
@@ -105,6 +107,8 @@ export default function SearchWeek() {
     return currentWeek;
   }
 
+  // made the foolish mistake of storing the current week as a string and 
+  // not a date object, so I have to do this ridiculousness to change the week
   function incrementWeek(backwards) {
     console.log(weekString)
     let date = weekString.match(/\b(\w+)\b/g);

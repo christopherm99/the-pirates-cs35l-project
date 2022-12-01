@@ -29,7 +29,6 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
 
   // main chip color
   let chipColors = [  
-    "bg-red-300",
     "bg-orange-200",
     "bg-blue-300",
     "bg-yellow-200",
@@ -39,7 +38,6 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
 
   // colors for carpools
   let innerChipColors = [  
-    "bg-red-200",
     "bg-orange-100",
     "bg-blue-200",
     "bg-yellow-100",
@@ -57,6 +55,13 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
   console.log(string_hash)
   let chipColor = chipColors[string_hash] +  " pt-1 pb-1.5 px-2.5 my-1 mx-0 rounded-xl";
   let innerChipColor = innerChipColors[string_hash] + " p-1 rounded mb-1";
+
+  // chip is now red if user is does not have a driver
+  if ( ! driverName ) {
+    chipColor = "bg-red-300 pt-1 pb-1.5 px-2.5 my-1 mx-0 rounded-xl";
+    innerChipColor = "bg-red-200 p-1 rounded mb-1"
+  }
+
   return (
     <div
       className={chipColor}

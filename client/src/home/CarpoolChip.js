@@ -44,14 +44,9 @@ const CarpoolChip = ({ passengers, leave_time, driver }) => {
     "bg-green-200",
     "bg-purple-200"
   ]
-  
-  let passengerString = "";
-  for (let i of passengers) {
-    passengerString += i.name;
-  }
 
   // "randomly" chooses a color based on the hash of a string
-  let string_hash = Math.abs(stringToHash(passengerString + driver.name + leave_time)) % (chipColors.length);
+  let string_hash = Math.abs(stringToHash(driver.name + leave_time)) % (chipColors.length);
   console.log(string_hash)
   let chipColor = chipColors[string_hash] +  " pt-1 pb-1.5 px-2.5 my-1 mx-0 rounded-xl";
   let innerChipColor = innerChipColors[string_hash] + " p-1 rounded mb-1";

@@ -10,7 +10,7 @@ const ListPage = ({ searchResults }) => {
   ) : (
     <article>
       <div className="centerSearch">
-        <p className="warning">No Matching Posts</p>
+        <p className="warning">No Matching Users</p>
       </div>
     </article>
   );

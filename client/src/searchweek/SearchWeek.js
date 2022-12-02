@@ -94,7 +94,7 @@ export default function SearchWeek() {
     let fridayString = currentFriday.format('dddd MMM D');
     let yearString = currentFriday.format('YYYY')
     return `${mondayString} to ${fridayString}, ${yearString}`;
-  }
+  } 
 
   // takes in a weekString style string
   function getDateObjFromString(week) {

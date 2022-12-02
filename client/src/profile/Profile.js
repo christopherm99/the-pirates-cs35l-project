@@ -67,7 +67,7 @@ export default function Profile() {
       );
     });
   return (
-    <>
+    <div className="flex-grow-1 flex flex-col">
       <div className="flex bg-white w-1/2 p-10 rounded-xl place-self-center mt-10 hover:drop-shadow-lg">
         <div className="flex-auto">
           <h1 className="font-medium text-xl">{user.name}</h1>
@@ -124,6 +124,6 @@ export default function Profile() {
           }
         </div>
       }
-    </>
+    </div>
   );
 }
